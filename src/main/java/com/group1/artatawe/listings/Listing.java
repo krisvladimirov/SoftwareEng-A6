@@ -1,5 +1,7 @@
 package com.group1.artatawe.listings;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.gson.JsonElement;
@@ -20,6 +22,7 @@ public class Listing {
 	private final BidHistory bidHistory;
 	private final long dateCreated;
 	private final String seller;   //Username of the seller
+	private final List<Comment> comments = new LinkedList<Comment>();
 	
 	private ListingState listingState;
 	
