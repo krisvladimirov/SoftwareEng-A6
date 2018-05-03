@@ -53,15 +53,43 @@ public class Comment {
         this.dislikes = jo.get("dislikes").getAsInt();
     }
 
+    /**
+     * Increments the like counter, indicating that someone liked this particular comment
+     */
     public void like() {
         this.likes++;
     }
 
+    /**
+     * Increment the dislike counter, indicating that someone disliked this particular comment
+     */
     public void dislike() {
         this.dislikes++;
     }
 
+    /**
+     *
+     * @return Returns how many likes a comment has
+     */
+    public int getLikes() {
+        return this.likes;
+    }
 
+    /**
+     *
+     * @return Returns how many dislikes a comment has
+     */
+    public int getDislikes() {
+        return this.dislikes;
+    }
 
+    /**
+     *
+     * @return The ratio of likes/dislikes of this comment
+     */
+    public double getLikeDislikeRatio() {
+        double ratio = this.likes / this.dislikes;
+        return ratio;
+    }
 
 }

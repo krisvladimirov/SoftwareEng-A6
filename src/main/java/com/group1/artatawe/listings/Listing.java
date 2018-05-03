@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.group1.artatawe.Main;
@@ -22,7 +23,7 @@ public class Listing {
 	private final BidHistory bidHistory;
 	private final long dateCreated;
 	private final String seller;   //Username of the seller
-	private final List<Comment> comments = new LinkedList<Comment>();
+	private final List<Comment> comments =  new LinkedList<Comment>();
 	
 	private ListingState listingState;
 	
@@ -63,6 +64,20 @@ public class Listing {
 		this.dateCreated = jo.get("datecreated").getAsLong();
 		this.seller = jo.get("seller").getAsString();
 		this.listingState = ListingState.valueOf(jo.get("state").getAsString());
+		this.loadComments(jo.getAsJsonArray("comments"));
+	}
+
+	/**
+	 * Loads all the comments of a listing
+	 * @param ja
+	 */
+	public void loadComments(JsonArray ja) {
+		JsonArray commentsArray = ja;
+		for (int i = 0; i < commentsArray.size(); i++) {
+			JsonObject object = commentsArray.get(i).getAsJsonObject();
+			Comment c = new Comment(object);
+			this.comments.add(c);
+		}
 	}
 	
 	/**
@@ -209,6 +224,14 @@ public class Listing {
 		for(Entry<String, JsonElement> entry : this.bidHistory.toJsonObject().entrySet()) {
 			jo.add(entry.getKey(), entry.getValue());
 		}
+
+		JsonArray commentsArray = new JsonArray();
+		comments.stream().forEach(x -> {
+			JsonObject j = x.toJsonObject();
+			commentsArray.add(j); // Adding a Json object into the array, this object hold all data about a comment
+		});
+
+		jo.add("comments", commentsArray);
 		
 		return jo;
 	}
