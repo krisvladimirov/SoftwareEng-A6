@@ -3,6 +3,9 @@ package com.group1.artatawe.listings;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Comment {
 
     private String commentValue = "";
@@ -10,6 +13,8 @@ public class Comment {
     private long dateCreated;
     private int listingId;
     private int likes = 0;
+    private Set<String> commented = new HashSet<String>();
+    private String lastClicked = null;
 
 
     public Comment(String commentValue, String owner, int listingId, long dateCreated) {
@@ -56,15 +61,32 @@ public class Comment {
     /**
      * Increments the like counter, indicating that someone liked this particular comment
      */
-    public void like() {
-        this.likes++;
+    public void like(String name) {
+        if (lastClicked == null && !commented.contains(name)) {
+            this.likes++;
+            commented.add(name);
+        } else if (lastClicked.equals("dislike") && commented.contains(name)) {
+            this.likes++;
+        } else if (lastClicked.equals("like") && commented.contains(name)) {
+            // Do nothing
+            System.out.println("No can't do");
+        }
+
     }
 
     /**
      * Decrement the like counter, indicating that someone disliked this particular comment
      */
-    public void dislike() {
-        this.likes--;
+    public void dislike(String name) {
+        if (lastClicked == null && !commented.contains(name)) {
+            this.likes--;
+            commented.add(name);
+        } else if (lastClicked.equals("like") && commented.contains(name)) {
+            this.likes--;
+        } else if (lastClicked.equals("dislike") && commented.contains(name)) {
+            // Do nothing
+            System.out.println("No can't do");
+        }
     }
 
     /**
@@ -93,6 +115,14 @@ public class Comment {
      */
     public String getOwner() {
         return this.owner;
+    }
+
+    /**
+     *
+     * @param value
+     */
+    public void setLastClicked(String value) {
+        this.lastClicked = value;
     }
 
 }

@@ -93,8 +93,6 @@ public class ViewListingController {
 
 	private Gallery currentGallery = null;
 
-
-
 	public void initialize() {
 		this.initializeHeader();
 		this.fixTileComments();
@@ -607,25 +605,62 @@ public class ViewListingController {
 		Image likeImage = new Image("/images/commentIcons/like-icon.png");
 		Image dislikeImage = new Image("/images/commentIcons/dislike-icon.png");
 
+		ImageView ivLikeIcon = new ImageView(likeImage);
+		ivLikeIcon.setSmooth(true);
+		ivLikeIcon.setPreserveRatio(true);
+		ivLikeIcon.setFitHeight(32);
+		ivLikeIcon.setFitWidth(32);
+
+		ImageView ivDislikeIcon = new ImageView(dislikeImage);
+		ivDislikeIcon.setSmooth(true);
+		ivDislikeIcon.setPreserveRatio(true);
+		ivDislikeIcon.setFitHeight(32);
+        ivDislikeIcon.setFitWidth(32);
+
+		/*
 		ImageView ivLike = new ImageView(likeImage);
 		ivLike.setSmooth(true);
 		ivLike.setPreserveRatio(true);
 
 		ivLike.setOnMouseClicked(e -> {
-			c.like();
+			c.like(Main.accountManager.getLoggedIn().getUserName());
 			l.setText("" + c.getLikes());
+			c.setLastClicked("like");
 		});
+        */
 
+		Button like = new Button();
+		like.setMaxSize(32, 32);
+		like.setGraphic(ivLikeIcon);
+		like.setOnMouseClicked(e -> {
+		    c.like(Main.accountManager.getLoggedIn().getUserName());
+            l.setText("" + c.getLikes());
+            c.setLastClicked("like");
+        });
+
+		Button dislike = new Button();
+		dislike.setMaxSize(32,32);
+		dislike.setGraphic(ivDislikeIcon);
+		dislike.setOnMouseClicked(e -> {
+            c.dislike(Main.accountManager.getLoggedIn().getUserName());
+            l.setText("" + c.getLikes());
+            c.setLastClicked("dislike");
+        });
+
+		/*
 		ImageView ivDislike = new ImageView(dislikeImage);
-		ivDislike.setSmooth(true);
+        ivDislike.setSmooth(true);
 		ivDislike.setPreserveRatio(true);
 
 		ivDislike.setOnMouseClicked(e -> {
-			c.dislike();
+			c.dislike(Main.accountManager.getLoggedIn().getUserName());
 			l.setText("" + c.getLikes());
+			c.setLastClicked("dislike");
 		});
+        */
 
-		h.getChildren().addAll(l, ivLike, ivDislike);
+		//h.getChildren().addAll(l, ivLike, ivDislike);
+        h.getChildren().addAll(l, like, dislike);
 		return h;
 	}
 

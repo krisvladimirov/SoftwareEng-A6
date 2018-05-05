@@ -201,7 +201,7 @@
                                     <Insets top="1.0" />
                                  </HBox.margin>
                                  <content>
-                                    <TilePane fx:id="tileComments" prefHeight="253.0" prefWidth="496.0" />
+                                    <TilePane fx:id="tileComments" prefColumns="1" prefHeight="253.0" prefWidth="496.0" />
                                  </content>
                               </ScrollPane>
                            </children>
