@@ -186,7 +186,6 @@ public class GalleryOptionsController {
                         //System.out.println(galleries.getItems().remove(textFieldChoice.getText().trim()));
 
                     }
-
                     this.updateListView();
                     textFieldChoice.clear();
 
@@ -200,7 +199,6 @@ public class GalleryOptionsController {
                             "A required field has not been filled!");
 
         }
-
         textFieldChoice.clear();
 
     }
@@ -216,6 +214,5 @@ public class GalleryOptionsController {
             return false;
         }
     }
-
 
 }

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
 import com.group1.artatawe.artwork.Artwork;
@@ -65,6 +66,7 @@ public class Listing {
 		this.seller = jo.get("seller").getAsString();
 		this.listingState = ListingState.valueOf(jo.get("state").getAsString());
 		this.loadComments(jo.getAsJsonArray("comments"));
+
 	}
 
 	/**
@@ -72,12 +74,20 @@ public class Listing {
 	 * @param ja
 	 */
 	public void loadComments(JsonArray ja) {
-		JsonArray commentsArray = ja;
-		for (int i = 0; i < commentsArray.size(); i++) {
-			JsonObject object = commentsArray.get(i).getAsJsonObject();
-			Comment c = new Comment(object);
-			this.comments.add(c);
-		}
+	    JsonArray commentsArray = ja;
+	    for (int i = 0; i < commentsArray.size(); i++) {
+	        JsonObject object = commentsArray.get(i).getAsJsonObject();
+	        Comment c = new Comment(object);
+	        this.comments.add(c);
+	    }
+	}
+
+	/**
+	 * Adds a comment to this listing
+	 * @param c
+	 */
+	public void addComment(Comment c) {
+		this.comments.add(c);
 	}
 	
 	/**
@@ -204,6 +214,10 @@ public class Listing {
 	public void cancelListing() {
 		this.listingState = ListingState.CANCELLED;
 	}
+
+	public List<Comment> getComments() {
+		return this.comments;
+	}
 	/**
 	 * Turn the Listing into a JsonObject
 	 * @return The JsonObject
@@ -230,7 +244,6 @@ public class Listing {
 			JsonObject j = x.toJsonObject();
 			commentsArray.add(j); // Adding a Json object into the array, this object hold all data about a comment
 		});
-
 		jo.add("comments", commentsArray);
 		
 		return jo;

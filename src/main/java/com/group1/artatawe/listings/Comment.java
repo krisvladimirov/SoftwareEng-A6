@@ -1,15 +1,15 @@
 package com.group1.artatawe.listings;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
 public class Comment {
 
-    private String commentValue;
-    private String owner;
+    private String commentValue = "";
+    private String owner = "";
     private long dateCreated;
     private int listingId;
     private int likes = 0;
-    private int dislikes = 0;
 
 
     public Comment(String commentValue, String owner, int listingId, long dateCreated) {
@@ -35,7 +35,6 @@ public class Comment {
         jo.addProperty("dateCreated", this.dateCreated);
         jo.addProperty("listingId", this.listingId);
         jo.addProperty("likes", this.likes);
-        jo.addProperty("dislikes", this.dislikes);
 
         return jo;
     }
@@ -45,12 +44,13 @@ public class Comment {
      * @param jo
      */
     public void loadFromJson(JsonObject jo) {
-        this.commentValue = jo.get("commentValue").getAsString();
-        this.owner = jo.get("owner").getAsString();
-        this.dateCreated = jo.get("dateCreated").getAsLong();
-        this.listingId = jo.get("listingId").getAsInt();
-        this.likes = jo.get("likes").getAsInt();
-        this.dislikes = jo.get("dislikes").getAsInt();
+
+            this.commentValue = jo.get("commentValue").getAsString();
+            this.owner = jo.get("owner").getAsString();
+            this.dateCreated = jo.get("dateCreated").getAsLong();
+            this.listingId = jo.get("listingId").getAsInt();
+            this.likes = jo.get("likes").getAsInt();
+
     }
 
     /**
@@ -61,10 +61,10 @@ public class Comment {
     }
 
     /**
-     * Increment the dislike counter, indicating that someone disliked this particular comment
+     * Decrement the like counter, indicating that someone disliked this particular comment
      */
     public void dislike() {
-        this.dislikes++;
+        this.likes--;
     }
 
     /**
@@ -77,19 +77,22 @@ public class Comment {
 
     /**
      *
-     * @return Returns how many dislikes a comment has
+     * @return the precise time of creation of this comment
      */
-    public int getDislikes() {
-        return this.dislikes;
+    public long getDateCreated() {
+        return this.dateCreated;
+    }
+
+    public String getCommentValue() {
+        return this.commentValue;
     }
 
     /**
      *
-     * @return The ratio of likes/dislikes of this comment
+     * @return
      */
-    public double getLikeDislikeRatio() {
-        double ratio = this.likes / this.dislikes;
-        return ratio;
+    public String getOwner() {
+        return this.owner;
     }
 
 }

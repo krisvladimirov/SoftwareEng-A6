@@ -1,9 +1,7 @@
 package com.group1.artatawe.controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.group1.artatawe.Main;
@@ -12,6 +10,7 @@ import com.group1.artatawe.artwork.Gallery;
 import com.group1.artatawe.artwork.Painting;
 import com.group1.artatawe.artwork.Sculpture;
 import com.group1.artatawe.listings.Bid;
+import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
 import com.group1.artatawe.listings.ListingState;
 import com.group1.artatawe.utils.AlertUtil;
@@ -21,6 +20,7 @@ import com.group1.artatawe.utils.WeeklyBarChart;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -29,8 +29,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -76,6 +79,14 @@ public class ViewListingController {
 	@FXML Button buttonAddCustomGallery;
 	@FXML MenuButton menuGallery;
 
+	//Commenting Attributes
+    @FXML Label commentsNum;
+    @FXML TextArea commentSection;
+    @FXML Button commentButton;
+    @FXML TilePane tileComments;
+    @FXML RadioMenuItem menuTopComments;
+    @FXML RadioMenuItem menuNewestComments;
+
 	//Gallery variables
 	private static final String ADD_BTN_MSG = "Add to gallery";
 	private static final String RMV_BTN_MSG = "Remove from gallery";
@@ -86,6 +97,8 @@ public class ViewListingController {
 
 	public void initialize() {
 		this.initializeHeader();
+		this.fixTileComments();
+		menuTopComments.setSelected(true);
 
 		this.title.setText(viewing.getArtwork().getTitle());
 
@@ -152,6 +165,7 @@ public class ViewListingController {
 		this.displayCurrentBid();
 		this.displayBidHistory();
 		this.renderInfo();
+		this.renderComments();
 	}
 
 	public void updateGalleryMenu(String name, Gallery g) {
@@ -204,6 +218,15 @@ public class ViewListingController {
 			}
 		});
 	}
+
+    /**
+     * Fixes the tile pane containing all comments
+     */
+	private void fixTileComments() {
+		tileComments.setVgap(10.0);
+	    tileComments.setHgap(10.0);
+        tileComments.setPadding(new Insets(10.0,10.0,10.0,10.0));
+    }
 
 	/**
 	 * Handle the bid button
@@ -533,5 +556,107 @@ public class ViewListingController {
 		Scene popupScene = new Scene(popBack, 300, 100);
 		popup.setScene(popupScene);
 		popup.show();
+	}
+
+	private void renderComments() {
+        List<Comment> sortedComments = viewing.getComments();
+        if (menuTopComments.isSelected()) {
+        	sortedComments.sort(Comparator.comparingInt(Comment::getLikes));
+		} else if (menuNewestComments.isSelected()) {
+        	sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated));
+		}
+
+		// Adds the Vbox holding the comment to the tile pane
+		sortedComments.forEach(x -> {
+			Node n = container(x);
+			tileComments.getChildren().add(n);
+		});
+
+
+    }
+
+    private Node container(Comment c) {
+	    VBox v = new VBox();
+	    v.setAlignment(Pos.TOP_LEFT);
+		// Create the container for the name and date
+		Node nameDate = nameDataHbox(c.getOwner(), c.getDateCreated());
+		Text comment = new Text(c.getCommentValue());
+		Node likeDislike = likeDislikeHbox(c);
+
+		v.getChildren().addAll(nameDate, comment, likeDislike);
+
+	    return v;
+    }
+
+    private Node nameDataHbox(String name, long dateOfCreation) {
+		HBox h = new HBox();
+		h.setAlignment(Pos.CENTER_LEFT);
+		//TODO -> fix the margins
+		Label owner = new Label(name);
+		Label creationDate = new Label(DATE_FORMAT.format(new Date(dateOfCreation)));
+
+		h.getChildren().addAll(owner, creationDate);
+
+		return h;
+	}
+
+	private Node likeDislikeHbox(Comment c) {
+		HBox h = new HBox();
+		Label l = new Label("" + c.getLikes());
+		l.setStyle("-fx-font-weight: bold");
+		Image likeImage = new Image("/images/commentIcons/like-icon.png");
+		Image dislikeImage = new Image("/images/commentIcons/dislike-icon.png");
+
+		ImageView ivLike = new ImageView(likeImage);
+		ivLike.setSmooth(true);
+		ivLike.setPreserveRatio(true);
+
+		ivLike.setOnMouseClicked(e -> {
+			c.like();
+			l.setText("" + c.getLikes());
+		});
+
+		ImageView ivDislike = new ImageView(dislikeImage);
+		ivDislike.setSmooth(true);
+		ivDislike.setPreserveRatio(true);
+
+		ivDislike.setOnMouseClicked(e -> {
+			c.dislike();
+			l.setText("" + c.getLikes());
+		});
+
+		h.getChildren().addAll(l, ivLike, ivDislike);
+		return h;
+	}
+
+	public void sortByTopComment() {
+		this.renderComments();
+    }
+
+    public void sortByNewestComment() {
+		this.renderComments();
+    }
+
+    public void comment() {
+	    String commentValue = commentSection.getText().trim();
+	    if (!viewingOwnListing) {
+	        // Not the listing of the currently logged user -> can comment
+	        if (!commentValue.isEmpty()) {
+                String name = Main.accountManager.getLoggedIn().getUserName();
+                Comment c = new Comment(commentValue, name, viewing.getID(), System.currentTimeMillis());
+                viewing.addComment(c);
+                this.renderComments();
+            }
+        } else {
+	    	AlertUtil.sendAlert(AlertType.ERROR, "Can not add own comment", "You can not leave own comment");
+		}
+		commentSection.clear();
+    }
+
+	/**
+	 * Sends a message to the seller of the artwork
+	 */
+	public void sendMessage() {
+
 	}
 }
