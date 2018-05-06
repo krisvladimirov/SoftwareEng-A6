@@ -558,11 +558,18 @@ public class ViewListingController {
 
 	private void renderComments() {
         List<Comment> sortedComments = viewing.getComments();
-        if (menuTopComments.isSelected()) {
-        	sortedComments.sort(Comparator.comparingInt(Comment::getLikes));
-		} else if (menuNewestComments.isSelected()) {
-        	sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated));
-		}
+        if (!sortedComments.isEmpty()) {
+            //sortedComments = viewing.getComments();
+            if (menuTopComments.isSelected()) {
+                sortedComments.sort(Comparator.comparingInt(Comment::getLikes));
+            } else if (menuNewestComments.isSelected()) {
+                sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated));
+            }
+        }
+
+
+		//Clears the tile pane of previous comments
+        tileComments.getChildren().clear();
 
 		// Adds the Vbox holding the comment to the tile pane
 		sortedComments.forEach(x -> {
@@ -570,12 +577,12 @@ public class ViewListingController {
 			tileComments.getChildren().add(n);
 		});
 
-
     }
 
     private Node container(Comment c) {
 	    VBox v = new VBox();
 	    v.setAlignment(Pos.TOP_LEFT);
+	    v.setMinSize(260,50);
 		// Create the container for the name and date
 		Node nameDate = nameDataHbox(c.getOwner(), c.getDateCreated());
 		Text comment = new Text(c.getCommentValue());
@@ -601,41 +608,30 @@ public class ViewListingController {
 	private Node likeDislikeHbox(Comment c) {
 		HBox h = new HBox();
 		Label l = new Label("" + c.getLikes());
-		l.setStyle("-fx-font-weight: bold");
+		l.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
 		Image likeImage = new Image("/images/commentIcons/like-icon.png");
 		Image dislikeImage = new Image("/images/commentIcons/dislike-icon.png");
 
 		ImageView ivLikeIcon = new ImageView(likeImage);
 		ivLikeIcon.setSmooth(true);
 		ivLikeIcon.setPreserveRatio(true);
-		ivLikeIcon.setFitHeight(32);
-		ivLikeIcon.setFitWidth(32);
+		ivLikeIcon.setStyle("-fx-padding: 5");
+		ivLikeIcon.setFitHeight(16);
+		ivLikeIcon.setFitWidth(16);
 
 		ImageView ivDislikeIcon = new ImageView(dislikeImage);
 		ivDislikeIcon.setSmooth(true);
 		ivDislikeIcon.setPreserveRatio(true);
-		ivDislikeIcon.setFitHeight(32);
-        ivDislikeIcon.setFitWidth(32);
-
-		/*
-		ImageView ivLike = new ImageView(likeImage);
-		ivLike.setSmooth(true);
-		ivLike.setPreserveRatio(true);
-
-		ivLike.setOnMouseClicked(e -> {
-			c.like(Main.accountManager.getLoggedIn().getUserName());
-			l.setText("" + c.getLikes());
-			c.setLastClicked("like");
-		});
-        */
+		ivDislikeIcon.setFitHeight(16);
+        ivDislikeIcon.setFitWidth(16);
 
 		Button like = new Button();
-		like.setMaxSize(32, 32);
+		like.setMaxSize(16, 16);
 		like.setGraphic(ivLikeIcon);
 		like.setOnMouseClicked(e -> {
 		    c.like(Main.accountManager.getLoggedIn().getUserName());
             l.setText("" + c.getLikes());
-            c.setLastClicked("like");
+            //c.setLastClicked("like");
         });
 
 		Button dislike = new Button();
@@ -644,22 +640,9 @@ public class ViewListingController {
 		dislike.setOnMouseClicked(e -> {
             c.dislike(Main.accountManager.getLoggedIn().getUserName());
             l.setText("" + c.getLikes());
-            c.setLastClicked("dislike");
+           //c.setLastClicked("dislike");
         });
 
-		/*
-		ImageView ivDislike = new ImageView(dislikeImage);
-        ivDislike.setSmooth(true);
-		ivDislike.setPreserveRatio(true);
-
-		ivDislike.setOnMouseClicked(e -> {
-			c.dislike(Main.accountManager.getLoggedIn().getUserName());
-			l.setText("" + c.getLikes());
-			c.setLastClicked("dislike");
-		});
-        */
-
-		//h.getChildren().addAll(l, ivLike, ivDislike);
         h.getChildren().addAll(l, like, dislike);
 		return h;
 	}
