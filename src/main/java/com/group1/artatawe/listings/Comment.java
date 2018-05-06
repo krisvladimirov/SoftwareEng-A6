@@ -14,6 +14,7 @@ public class Comment {
     private int listingId;
     private int likes = 0;
     private Set<String> commented = new HashSet<String>();
+    private Map<String, String> userClick = new HashMap<>();
     private String lastClicked = null;
 
 
