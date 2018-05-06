@@ -32,7 +32,7 @@ public class Comment {
      *
      * @return
      */
-    public JsonObject toJsonObject() {
+   public JsonObject toJsonObject() {
         JsonObject jo = new JsonObject();
 
         jo.addProperty("commentValue", this.commentValue);
@@ -40,6 +40,21 @@ public class Comment {
         jo.addProperty("dateCreated", this.dateCreated);
         jo.addProperty("listingId", this.listingId);
         jo.addProperty("likes", this.likes);
+
+        JsonArray jsonArray = new JsonArray();
+
+        Iterator<Map.Entry<String, String>> iterator = userClick.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> data = iterator.next();
+            String name = data.getKey();
+            String click = data.getValue();
+            JsonObject userAction = new JsonObject();
+            userAction.addProperty("name",name);
+            userAction.addProperty("action", click);
+            jsonArray.add(userAction);
+        }
+
+        jo.add("binding", jsonArray);
 
         return jo;
     }
@@ -50,18 +65,52 @@ public class Comment {
      */
     public void loadFromJson(JsonObject jo) {
 
-            this.commentValue = jo.get("commentValue").getAsString();
-            this.owner = jo.get("owner").getAsString();
-            this.dateCreated = jo.get("dateCreated").getAsLong();
-            this.listingId = jo.get("listingId").getAsInt();
-            this.likes = jo.get("likes").getAsInt();
+        this.commentValue = jo.get("commentValue").getAsString();
+        this.owner = jo.get("owner").getAsString();
+        this.dateCreated = jo.get("dateCreated").getAsLong();
+        this.listingId = jo.get("listingId").getAsInt();
+        this.likes = jo.get("likes").getAsInt();
 
+        JsonArray bindingArray = jo.getAsJsonArray("binding");
+        for (int i = 0; i < bindingArray.size(); i++) {
+            JsonObject object = bindingArray.get(i).getAsJsonObject();
+            addBinding(object);
+        }
+    }
+    
+    /**
+     *
+     * @param jo
+     */
+    private void addBinding(JsonObject jo) {
+        String name = jo.get("name").getAsString();
+        String action = jo.get("action").getAsString();
+
+        userClick.put(name, action);
     }
 
     /**
      * Increments the like counter, indicating that someone liked this particular comment
      */
     public void like(String name) {
+
+        if (!userClick.containsKey(name)) {
+            this.likes++;
+            this.userClick.put(name, "like");
+        } else if (userClick.containsKey(name) && userClick.get(name) == null) {
+            this.likes++;
+            this.userClick.put(name, "like");
+        } else if (userClick.containsKey(name) && userClick.get(name).equals("dislike")) {
+            this.likes++;
+            this.userClick.put(name, "like");
+        } else if (userClick.containsKey(name) && userClick.get(name).equals("like")) {
+            this.likes--;
+            this.userClick.put(name, null);
+            //System.out.println("No can't do");
+        }
+
+
+        /*
         if (lastClicked == null && !commented.contains(name)) {
             this.likes++;
             commented.add(name);
@@ -71,13 +120,30 @@ public class Comment {
             // Do nothing
             System.out.println("No can't do");
         }
-
+        */
     }
 
     /**
      * Decrement the like counter, indicating that someone disliked this particular comment
      */
     public void dislike(String name) {
+
+        if (!userClick.containsKey(name)) {
+            this.likes--;
+            this.userClick.put(name, "dislike");
+        } else if (userClick.containsKey(name) && userClick.get(name) == null) {
+            this.likes--;
+            this.userClick.put(name, "dislike");
+        } else if (userClick.containsKey(name) && userClick.get(name).equals("like")) {
+            this.likes--;
+            this.userClick.put(name, "dislike");
+        } else if (userClick.containsKey(name) && userClick.get(name).equals("dislike")) {
+            this.likes++;
+            this.userClick.put(name, null);
+            System.out.println("No can't do");
+        }
+
+        /*
         if (lastClicked == null && !commented.contains(name)) {
             this.likes--;
             commented.add(name);
@@ -87,6 +153,7 @@ public class Comment {
             // Do nothing
             System.out.println("No can't do");
         }
+        */
     }
 
     /**
