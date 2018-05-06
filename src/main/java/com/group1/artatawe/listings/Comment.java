@@ -1,10 +1,10 @@
 package com.group1.artatawe.listings;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Comment {
 
@@ -48,7 +48,12 @@ public class Comment {
         while (iterator.hasNext()) {
             Map.Entry<String, String> data = iterator.next();
             String name = data.getKey();
-            String click = data.getValue();
+            String click = "";
+            if (data.getValue() == null) {
+                click = "null";
+            } else {
+                click = data.getValue();
+            }
             JsonObject userAction = new JsonObject();
             userAction.addProperty("name",name);
             userAction.addProperty("action", click);
@@ -86,8 +91,11 @@ public class Comment {
     private void addBinding(JsonObject jo) {
         String name = jo.get("name").getAsString();
         String action = jo.get("action").getAsString();
-
-        userClick.put(name, action);
+        if (action.equals("null")) {
+            userClick.put(name, null);
+        } else {
+            userClick.put(name, action);
+        }
     }
 
     /**
@@ -98,15 +106,12 @@ public class Comment {
         if (!userClick.containsKey(name)) {
             this.likes++;
             this.userClick.put(name, "like");
-        } else if (userClick.containsKey(name) && userClick.get(name) == null) {
-            this.likes++;
-            this.userClick.put(name, "like");
         } else if (userClick.containsKey(name) && userClick.get(name).equals("dislike")) {
-            this.likes++;
+            this.likes+=2;
             this.userClick.put(name, "like");
         } else if (userClick.containsKey(name) && userClick.get(name).equals("like")) {
             this.likes--;
-            this.userClick.put(name, null);
+            this.userClick.remove(name);
             //System.out.println("No can't do");
         }
 
@@ -132,16 +137,13 @@ public class Comment {
         if (!userClick.containsKey(name)) {
             this.likes--;
             this.userClick.put(name, "dislike");
-        } else if (userClick.containsKey(name) && userClick.get(name) == null) {
-            this.likes--;
-            this.userClick.put(name, "dislike");
         } else if (userClick.containsKey(name) && userClick.get(name).equals("like")) {
-            this.likes--;
+            this.likes -= 2;
             this.userClick.put(name, "dislike");
         } else if (userClick.containsKey(name) && userClick.get(name).equals("dislike")) {
             this.likes++;
-            this.userClick.put(name, null);
-            System.out.println("No can't do");
+            this.userClick.remove(name);
+            //System.out.println("No can't do");
         }
 
         /*
