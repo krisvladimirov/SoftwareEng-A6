@@ -35,8 +35,6 @@ public class Chat {
      */
     public void loadFromJson(JsonObject jo) {
 
-        //Account a1 = Main.accountManager.getAccount(jo.get("account1").getAsString());
-        //Account a2 = Main.accountManager.getAccount(jo.get("account2").getAsString());
         JsonArray accountArray = jo.getAsJsonArray("accounts");
         for (int i = 0; i < accountArray.size(); i++) {
             String account = accountArray.get(i).getAsString();

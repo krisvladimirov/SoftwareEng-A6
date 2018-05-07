@@ -2,6 +2,8 @@ package com.group1.artatawe.utils;
 
 import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
+import com.group1.artatawe.communication.Message;
+import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
 import com.group1.artatawe.listings.ListingState;
 
@@ -75,5 +77,14 @@ public class Notification {
                 .filter(x -> !x.getCurrentBid().getBidder().equals(currentUser))
                 .filter(x -> x.getCurrentBid().getDate() > lastLoginDate)
                 .collect(Collectors.toList());
+    }
+
+    public List<Message> getNewMessages() {
+
+        return null;
+    }
+
+    public List<Comment> getNewComments() {
+        return null;
     }
 }

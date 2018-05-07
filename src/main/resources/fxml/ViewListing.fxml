@@ -208,7 +208,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="683.0" layoutY="385.0" mnemonicParsing="false" onAction="#sendMessage" text="Send message" />
+                  <Button fx:id="messageButton" layoutX="634.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="25.0" prefWidth="142.0" text="Send message" />
                </children>
             </AnchorPane>
          </center>

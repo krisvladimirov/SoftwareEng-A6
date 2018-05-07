@@ -19,7 +19,7 @@ public class MessageManager {
     private final List<Chat> chats = new LinkedList<>();
 
     public MessageManager() {
-
+        this.loadChats();
     }
 
     /**
@@ -42,12 +42,20 @@ public class MessageManager {
     }
 
     /**
+     * Adds a chat to the list of chats
+     * @param c the chat
+     */
+    public void addChat(Chat c) {
+        this.chats.add(c);
+    }
+
+    /**
      * Checks if a chat already exists, if not an exception would be thrown from the lambda expression
      * @param a1 Sender account
      * @param a2 Receiver account
      * @return The chat between the two accounts or and exception that there is not chat between them
      */
-    private Chat getChat(Account a1, Account a2) {
+    public Chat getChat(Account a1, Account a2) {
 
         Chat c = chats.stream()
                         .filter(x -> x.getAccounts().contains(a1)
@@ -63,18 +71,7 @@ public class MessageManager {
      * between the two users) and create a new chat.
      * @param message The message that would be sen
      */
-    public void sendMessage(Account a1, Account a2, Message message) {
 
-        try {
-            Chat c = getChat(a1, a2);
-            c.addMessage(message);
-        } catch (NoSuchElementException e) {
-            Chat c = new Chat(a1, a2);
-            c.addMessage(message);
-            this.chats.add(c);
-        }
-
-    }
 
     /**
      * Deletes a chat

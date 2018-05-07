@@ -1,5 +1,6 @@
 package com.group1.artatawe.controllers;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import com.group1.artatawe.utils.NumUtil;
 import com.group1.artatawe.utils.WeeklyBarChart;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -28,10 +30,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -88,6 +87,9 @@ public class ViewListingController {
     @FXML RadioMenuItem menuTopComments;
     @FXML RadioMenuItem menuNewestComments;
 
+    //Message button
+    @FXML Button messageButton;
+
 	//Gallery variables
 	private static final String ADD_BTN_MSG = "Add to gallery";
 	private static final String RMV_BTN_MSG = "Remove from gallery";
@@ -111,6 +113,7 @@ public class ViewListingController {
 		if(viewingOwnListing) {
 			this.amount.setVisible(false);
 			this.placebid.setVisible(false);
+            this.messageButton.setVisible(false);
 		}
 
 		if(viewing.getListingState() != ListingState.ACTIVE) {
@@ -118,6 +121,8 @@ public class ViewListingController {
 			this.placebid.setVisible(false);
 			this.bidsleft.setText("Auction Has Ended.");
 		}
+
+
 
 		//Set seller information
 		Account seller = Main.accountManager.getAccount(viewing.getSeller());
@@ -632,7 +637,6 @@ public class ViewListingController {
 		like.setOnMouseClicked(e -> {
 		    c.like(Main.accountManager.getLoggedIn().getUserName());
             l.setText("" + c.getLikes());
-            //c.setLastClicked("like");
         });
 
 		Button dislike = new Button();
@@ -641,7 +645,6 @@ public class ViewListingController {
 		dislike.setOnMouseClicked(e -> {
             c.dislike(Main.accountManager.getLoggedIn().getUserName());
             l.setText("" + c.getLikes());
-           //c.setLastClicked("dislike");
         });
 
         h.getChildren().addAll(l, like, dislike);
@@ -676,21 +679,25 @@ public class ViewListingController {
 	 * Sends a message to the seller of the artwork
 	 */
 	public void sendMessage() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Message.fxml"));
+			BorderPane someRoot = (BorderPane) loader.load();
+			MessageController controller = loader.getController();
 
-		//TODO -> add a popup to send a message and display previous methods
+			controller.init(Main.accountManager.getAccount(viewing.getSeller()));
 
+			Scene scene = new Scene(someRoot);
 
+			Stage stage= new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Artatawe");
+
+			stage.initModality(Modality.APPLICATION_MODAL);
+
+			stage.showAndWait();
+
+		} catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
-
-	private void nothingForNow() {
-
-		// Check if the chat already exists
-		// If not create a new one
-		// If it does send a message
-		Account sender = Main.accountManager.getLoggedIn();
-		Account reciever = Main.accountManager.getAccount(viewing.getSeller());
-		//Main.messageManager.addMessage();
-		Chat newChat = new Chat(sender, reciever);
-	}
-
 }
