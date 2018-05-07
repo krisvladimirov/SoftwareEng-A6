@@ -34,56 +34,51 @@ public class Comment {
      * @return
      */
    public JsonObject toJsonObject() {
-        JsonObject jo = new JsonObject();
+       JsonObject jo = new JsonObject();
 
-        jo.addProperty("commentValue", this.commentValue);
-        jo.addProperty("owner", this.owner);
-        jo.addProperty("dateCreated", this.dateCreated);
-        jo.addProperty("listingId", this.listingId);
-        jo.addProperty("likes", this.likes);
+       jo.addProperty("commentValue", this.commentValue);
+       jo.addProperty("owner", this.owner);
+       jo.addProperty("dateCreated", this.dateCreated);
+       jo.addProperty("listingId", this.listingId);
+       jo.addProperty("likes", this.likes);
 
-        JsonArray jsonArray = new JsonArray();
+       JsonArray jsonArray = new JsonArray();
 
-        Iterator<Map.Entry<String, String>> iterator = userClick.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> data = iterator.next();
-            String name = data.getKey();
-            String click = "";
-            if (data.getValue() == null) {
-                click = "null";
-            } else {
-                click = data.getValue();
-            }
-            JsonObject userAction = new JsonObject();
-            userAction.addProperty("name",name);
-            userAction.addProperty("action", click);
-            jsonArray.add(userAction);
-        }
+       Iterator<Map.Entry<String, String>> iterator = userClick.entrySet().iterator();
+       while (iterator.hasNext()) {
+           Map.Entry<String, String> data = iterator.next();
+           String name = data.getKey();
+           String click = "";
+           if (data.getValue() == null) {
+               click = "null";
+           } else {
+               click = data.getValue();
+           }
+           JsonObject userAction = new JsonObject();
+           userAction.addProperty("name", name);
+           userAction.addProperty("action", click);
+           jsonArray.add(userAction);
+       }
 
-        jo.add("binding", jsonArray);
+       jo.add("binding", jsonArray);
 
-        return jo;
-    }
+       return jo;
+   }
+   private void loadFromJson(JsonObject jo) {
 
-    /**
-     *
-     * @param jo
-     */
-    public void loadFromJson(JsonObject jo) {
+       this.commentValue = jo.get("commentValue").getAsString();
+       this.owner = jo.get("owner").getAsString();
+       this.dateCreated = jo.get("dateCreated").getAsLong();
+       this.listingId = jo.get("listingId").getAsInt();
+       this.likes = jo.get("likes").getAsInt();
 
-        this.commentValue = jo.get("commentValue").getAsString();
-        this.owner = jo.get("owner").getAsString();
-        this.dateCreated = jo.get("dateCreated").getAsLong();
-        this.listingId = jo.get("listingId").getAsInt();
-        this.likes = jo.get("likes").getAsInt();
+       JsonArray bindingArray = jo.getAsJsonArray("binding");
+       for (int i = 0; i < bindingArray.size(); i++) {
+           JsonObject object = bindingArray.get(i).getAsJsonObject();
+           addBinding(object);
+       }
+   }
 
-        JsonArray bindingArray = jo.getAsJsonArray("binding");
-        for (int i = 0; i < bindingArray.size(); i++) {
-            JsonObject object = bindingArray.get(i).getAsJsonObject();
-            addBinding(object);
-        }
-    }
-    
     /**
      *
      * @param jo
@@ -174,7 +169,6 @@ public class Comment {
     public long getDateCreated() {
         return this.dateCreated;
     }
-
     public String getCommentValue() {
         return this.commentValue;
     }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.group1.artatawe.managers.AccountManager;
 import com.group1.artatawe.managers.ListingManager;
 
+import com.group1.artatawe.managers.MessageManager;
 import com.group1.artatawe.utils.Notification;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class Main extends Application {
 	public static final ListingManager listingManager = new ListingManager();
 	public static final AccountManager accountManager = new AccountManager();
 	public static final Notification notifications = new Notification();
+	public static final MessageManager messageManager = new MessageManager();
 
 	private static Stage mainStage = null;
 	
