@@ -112,7 +112,7 @@ public class ListingManager {
 		try {
 			scanner = new Scanner(file);
 
-			while(scanner.hasNextLine()) {
+			while (scanner.hasNextLine()) {
 				String nextLine = scanner.nextLine().trim();
 
 				if(! nextLine.isEmpty()) {

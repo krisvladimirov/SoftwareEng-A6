@@ -9,6 +9,7 @@ import com.group1.artatawe.accounts.Account;
 import com.group1.artatawe.artwork.Gallery;
 import com.group1.artatawe.artwork.Painting;
 import com.group1.artatawe.artwork.Sculpture;
+import com.group1.artatawe.communication.Chat;
 import com.group1.artatawe.listings.Bid;
 import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
@@ -676,5 +677,20 @@ public class ViewListingController {
 	 */
 	public void sendMessage() {
 
+		//TODO -> add a popup to send a message and display previous methods
+
+
 	}
+
+	private void nothingForNow() {
+
+		// Check if the chat already exists
+		// If not create a new one
+		// If it does send a message
+		Account sender = Main.accountManager.getLoggedIn();
+		Account reciever = Main.accountManager.getAccount(viewing.getSeller());
+		//Main.messageManager.addMessage();
+		Chat newChat = new Chat(sender, reciever);
+	}
+
 }

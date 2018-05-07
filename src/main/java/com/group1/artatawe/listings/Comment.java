@@ -13,9 +13,7 @@ public class Comment {
     private long dateCreated;
     private int listingId;
     private int likes = 0;
-    private Set<String> commented = new HashSet<String>();
     private Map<String, String> userClick = new HashMap<>();
-    private String lastClicked = null;
 
 
     public Comment(String commentValue, String owner, int listingId, long dateCreated) {
@@ -77,6 +75,7 @@ public class Comment {
            JsonObject object = bindingArray.get(i).getAsJsonObject();
            addBinding(object);
        }
+
    }
 
     /**
@@ -84,6 +83,7 @@ public class Comment {
      * @param jo
      */
     private void addBinding(JsonObject jo) {
+
         String name = jo.get("name").getAsString();
         String action = jo.get("action").getAsString();
         if (action.equals("null")) {
@@ -91,6 +91,7 @@ public class Comment {
         } else {
             userClick.put(name, action);
         }
+
     }
 
     /**
@@ -110,18 +111,6 @@ public class Comment {
             //System.out.println("No can't do");
         }
 
-
-        /*
-        if (lastClicked == null && !commented.contains(name)) {
-            this.likes++;
-            commented.add(name);
-        } else if (lastClicked.equals("dislike") && commented.contains(name)) {
-            this.likes++;
-        } else if (lastClicked.equals("like") && commented.contains(name)) {
-            // Do nothing
-            System.out.println("No can't do");
-        }
-        */
     }
 
     /**
@@ -141,17 +130,6 @@ public class Comment {
             //System.out.println("No can't do");
         }
 
-        /*
-        if (lastClicked == null && !commented.contains(name)) {
-            this.likes--;
-            commented.add(name);
-        } else if (lastClicked.equals("like") && commented.contains(name)) {
-            this.likes--;
-        } else if (lastClicked.equals("dislike") && commented.contains(name)) {
-            // Do nothing
-            System.out.println("No can't do");
-        }
-        */
     }
 
     /**
@@ -179,14 +157,6 @@ public class Comment {
      */
     public String getOwner() {
         return this.owner;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setLastClicked(String value) {
-        this.lastClicked = value;
     }
 
 }

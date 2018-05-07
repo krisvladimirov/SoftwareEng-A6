@@ -6,10 +6,11 @@ import com.group1.artatawe.accounts.Account;
 
 public class Message {
 
-    private Account sender;
-    private Account recipient;
     private String messageValue;
     private long date;
+    private Account[] participants = new Account[2];
+    // The sender would always be at participants[0]
+    // The recipient would always be at participants[1]
 
     /**
      *
@@ -19,8 +20,8 @@ public class Message {
      * @param date
      */
     public Message(Account sender, Account recipient, String messageValue, long date) {
-        this.sender = sender;
-        this.recipient = recipient;
+        this.participants[0] = sender;
+        this.participants[1] = recipient;
         this.messageValue = messageValue;
         this.date = date;
     }
@@ -40,8 +41,8 @@ public class Message {
      */
     private void loadFromJson(JsonObject jo) {
 
-        this.sender = Main.accountManager.getAccount(jo.get("sender").getAsString());
-        this.recipient = Main.accountManager.getAccount(jo.get("recipient").getAsString());
+        this.participants[0] = Main.accountManager.getAccount(jo.get("sender").getAsString());
+        this.participants[1] = Main.accountManager.getAccount(jo.get("recipient").getAsString());
         this.messageValue = jo.get("messageValue").getAsString();
         this.date = jo.get("date").getAsLong();
 
@@ -54,8 +55,8 @@ public class Message {
     public JsonObject toJsonObject() {
         JsonObject jo = new JsonObject();
 
-        jo.addProperty("sender", sender.getUserName());
-        jo.addProperty("recipient", recipient.getUserName());
+        jo.addProperty("sender", participants[0].getUserName());
+        jo.addProperty("recipient", participants[1].getUserName());
         jo.addProperty("messageValue", messageValue);
         jo.addProperty("date", date);
 
@@ -67,12 +68,12 @@ public class Message {
         return this.messageValue;
     }
 
-    public Account getRecipient() {
-        return this.recipient;
+    public Account getSender() {
+        return this.participants[0];
     }
 
-    public Account getSender() {
-        return this.sender;
+    public Account getRecipient() {
+        return this.participants[1];
     }
 
     public long getDate() {
