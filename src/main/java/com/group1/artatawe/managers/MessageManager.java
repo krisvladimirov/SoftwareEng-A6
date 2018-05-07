@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MessageManager {
 
@@ -63,6 +64,17 @@ public class MessageManager {
                         .get();
 
         return c;
+    }
+
+    /**
+     * Retrieves only chats where the user has participated in
+     * @param a The specific account for which chats are filtered
+     * @return List of chats where the account has participated in
+     */
+    public List<Chat> getChat(Account a) {
+        return chats.stream()
+                    .filter(x -> x.getAccounts().contains(a))
+                    .collect(Collectors.toList());
     }
 
     /**

@@ -2,22 +2,27 @@ package com.group1.artatawe.utils;
 
 import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
+import com.group1.artatawe.communication.Chat;
 import com.group1.artatawe.communication.Message;
 import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
 import com.group1.artatawe.listings.ListingState;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Class used to generate data for notifications
  *
- * @author Oskar Figura and Nikolina Antoniou
- * @version 1.0
+ * @author Oskar Figura, Nikolina Antoniou and Kristiyan Vladimirov (v1.1)
+ * @version 1.1
  * created on: 05/03/2018.
  */
 public class Notification {
+
+    //private List<Message> newMessages;
+    //private List<Message> newComments;
 
     /**
      * Create a new Notification object
@@ -79,12 +84,41 @@ public class Notification {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get a list of all new messages to the currentUser
+     * @return
+     */
     public List<Message> getNewMessages() {
 
-        return null;
+        long lastLoginDate = Main.accountManager.getLoggedIn().getLastLogin();
+        // All the chats a user has participated in
+        List<Chat> list = Main.messageManager.getChat(Main.accountManager.getLoggedIn());
+        // All the new messages would be stored here
+        List<Message> newMessages = new LinkedList<>();
+
+        list.forEach(chat -> chat.getNewMessages(lastLoginDate)
+                    .forEach(message -> newMessages.add(message)));
+
+        return newMessages;
     }
 
+    /**
+     * Get a list of all new comments on a sellers actions since last login
+     * @return
+     */
     public List<Comment> getNewComments() {
-        return null;
+        String currentUser = Main.accountManager.getLoggedIn().getUserName();
+        long lastLoginDate = Main.accountManager.getLoggedIn().getLastLogin();
+        // All of the currentUser's listings
+        List<Listing> listings = Main.listingManager.getAllListings().stream()
+                                            .filter(listing -> listing.getSeller().equals(currentUser))
+                                            .collect(Collectors.toList());
+
+        List<Comment> newComments = new LinkedList<>();
+        // All new comments to any of the currentUser's listings
+        listings.forEach(listing -> listing.getNewComments(lastLoginDate)
+                        .forEach(comment -> newComments.add(comment)));
+
+        return newComments;
     }
 }

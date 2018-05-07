@@ -3,6 +3,7 @@ package com.group1.artatawe.listings;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -89,6 +90,18 @@ public class Listing {
 	public void addComment(Comment c) {
 		this.comments.add(c);
 	}
+
+	/**
+	 * Gets all new comments that were added to this listing since the last login of the seller
+	 * @param lastLogin
+	 * @return
+	 */
+	public List<Comment> getNewComments(long lastLogin) {
+		return comments.stream()
+						.filter(x -> x.getDateCreated() > lastLogin)
+						.collect(Collectors.toList());
+	}
+
 	
 	/**
 	 * Create a bid for this listing

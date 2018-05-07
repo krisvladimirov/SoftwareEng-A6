@@ -125,7 +125,9 @@ public class ProfileController {
 
     }
 
+    private void generateNotificationsV2() {
 
+    }
 
     /**
      * Generate notifications for logged in user
@@ -135,10 +137,8 @@ public class ProfileController {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    ViewListingController
-                            .viewListing(notificationsListings
-                                    .get(notificationsList.getSelectionModel()
-                                            .getSelectedIndices().get(0)));
+
+                    ViewListingController.viewListing(notificationsListings.get(notificationsList.getSelectionModel().getSelectedIndices().get(0)));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(e.getMessage());
                 }

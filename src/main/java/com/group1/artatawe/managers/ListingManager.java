@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.group1.artatawe.accounts.Account;
 import com.group1.artatawe.artwork.Artwork;
+import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
 import com.group1.artatawe.listings.ListingState;
 import java.io.File;

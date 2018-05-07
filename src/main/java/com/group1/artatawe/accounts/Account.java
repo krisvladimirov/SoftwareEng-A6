@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.group1.artatawe.Main;
+import com.group1.artatawe.communication.Message;
+import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.listings.Listing;
 import com.group1.artatawe.utils.ImageUtil;
 import javafx.scene.image.Image;

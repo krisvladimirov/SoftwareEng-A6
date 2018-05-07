@@ -6,6 +6,7 @@ import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Chat {
 
@@ -67,6 +68,17 @@ public class Chat {
 
         return jo;
 
+    }
+
+    /**
+     * Gets all new messages that were added to this chat since the last login of the seller
+     * @param lastLoging
+     * @return
+     */
+    public List<Message> getNewMessages(long lastLoging) {
+        return messages.stream()
+                        .filter(x -> x.getDate() > lastLoging)
+                        .collect(Collectors.toList());
     }
 
     /**
