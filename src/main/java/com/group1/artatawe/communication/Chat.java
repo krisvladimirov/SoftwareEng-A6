@@ -39,10 +39,9 @@ public class Chat {
         //Account a2 = Main.accountManager.getAccount(jo.get("account2").getAsString());
         JsonArray accountArray = jo.getAsJsonArray("accounts");
         for (int i = 0; i < accountArray.size(); i++) {
-            JsonObject object = accountArray.get(i).getAsJsonObject();
+            String account = accountArray.get(i).getAsString();
+            this.accounts.add(Main.accountManager.getAccount(account));
         }
-        this.accounts.add(a1);
-        this.accounts.add(a2);
 
         JsonArray messagesArray = jo.getAsJsonArray("messages");
         for (int i = 0; i < messagesArray.size(); i++) {
