@@ -71,12 +71,12 @@ public class ProfileController {
 	@FXML Button showWeeklySalesGraphButton;
 	@FXML Button showMonthlySalesGraphButton;
 
-    @FXML
-    GridPane selling;
-    @FXML
-    GridPane sold;
-    @FXML
-    GridPane wonauctions;
+    @FXML GridPane selling;
+    @FXML GridPane sold;
+    @FXML GridPane wonauctions;
+
+    // Messaging
+    @FXML Button messageButton;
 
     @FXML
     ListView<String> notificationsList;
@@ -101,10 +101,12 @@ public class ProfileController {
         this.lastseen.setText(DATE_FORMAT.format(new Date(viewing.getLastLogin())));
 
         if (!viewingOwnProfile) {
+            this.messageButton.setVisible(true);
             this.editaccount.setVisible(false);
             this.notificationsList.setVisible(false);
         } else {
             this.notificationsList.setVisible(true);
+            this.messageButton.setVisible(false);
             generateNotifications();
         }
 
@@ -124,10 +126,6 @@ public class ProfileController {
         this.showWeeklySalesGraphButton.setOnMouseClicked(e -> renderWeeklyGraph());
         this.showMonthlySalesGraphButton.setOnMouseClicked(e -> renderMonthlyGraph());
         this.editGalleries.setOnMouseClicked(e -> galleryMenuPopup());
-
-    }
-
-    private void generateNotificationsV2() {
 
     }
 
@@ -234,6 +232,7 @@ public class ProfileController {
             this.favbutton.setVisible(false);
         }
     }
+
 
     /**
      * Turns a Listing that is currently being sold, into a node
@@ -522,5 +521,30 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Sends a message to a user
+     */
+    public void sendMessage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Message.fxml"));
+            BorderPane someRoot = (BorderPane) loader.load();
+            MessageController controller = loader.getController();
+
+            controller.init(viewing);
+
+            Scene scene = new Scene(someRoot);
+
+            Stage stage= new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Artatawe");
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

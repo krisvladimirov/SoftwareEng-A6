@@ -180,6 +180,7 @@
                   <Button fx:id="showWeeklySalesGraphButton" layoutX="704.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: lightgrey;" text="Weekly Sales Performance" />
                   <Button fx:id="showMonthlySalesGraphButton" layoutX="870.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: lightgrey;" text="Monthly Sales Performance" />
                   <Button fx:id="editGalleries" layoutX="1144.0" layoutY="61.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="Edit Galleries" />
+                  <Button fx:id="messageButton" layoutX="1144.0" layoutY="14.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="Send Message" visible="false" />
                </children>
             </AnchorPane>
          </content>
