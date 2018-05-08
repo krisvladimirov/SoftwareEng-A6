@@ -23,6 +23,8 @@ public class Main extends Application {
 	public static final Notification notifications = new Notification();
 	public static final MessageManager messageManager = new MessageManager();
 
+	public static boolean checkedMessages = false;
+
 	private static Stage mainStage = null;
 	
 	public static void main(String[] args) {

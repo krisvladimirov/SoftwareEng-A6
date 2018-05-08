@@ -53,6 +53,19 @@ public class CustomGalleryController {
                 ProfileController.viewProfile(Main.accountManager.getLoggedIn());
             }
         });
+        this.updateMessageNotifyer();
+    }
+
+    /**
+     *
+     */
+    private void updateMessageNotifyer() {
+        int n = Main.notifications.howManyNewMessages();
+        if (n != 0 && n > 0 && !Main.checkedMessages) {
+            myMessages.setText("My Messages (" + n + ")");
+        } else {
+            myMessages.setText("My Messages");
+        }
     }
 
     /**

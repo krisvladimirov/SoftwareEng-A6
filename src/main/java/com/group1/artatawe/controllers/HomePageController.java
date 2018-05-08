@@ -63,6 +63,21 @@ public class HomePageController {
 				ProfileController.viewProfile(Main.accountManager.getLoggedIn());
 			}
 		});
+		Main.notifications.scanForNewMessages();
+		this.updateMessageNotifyer();
+	}
+
+	/**
+	 *
+	 */
+	private void updateMessageNotifyer() {
+		int n = Main.notifications.howManyNewMessages();
+		System.out.println("How much is n: " + n);
+		if (n != 0 && n > 0 && !Main.checkedMessages) {
+			myMessages.setText("My Messages (" + n + ")");
+		} else {
+			myMessages.setText("My Messages");
+		}
 	}
 
 	/**

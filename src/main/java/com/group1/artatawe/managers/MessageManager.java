@@ -2,6 +2,7 @@ package com.group1.artatawe.managers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
 import com.group1.artatawe.communication.Chat;
 import com.group1.artatawe.communication.Message;

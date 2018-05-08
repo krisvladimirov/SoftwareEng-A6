@@ -76,7 +76,9 @@ public class Chat {
      * @return
      */
     public List<Message> getNewMessages(long lastLoging) {
+        Account a = Main.accountManager.getLoggedIn();
         return messages.stream()
+                        .filter(x -> x.getRecipient() == a)
                         .filter(x -> x.getDate() > lastLoging)
                         .collect(Collectors.toList());
     }

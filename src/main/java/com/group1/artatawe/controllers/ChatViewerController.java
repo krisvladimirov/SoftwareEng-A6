@@ -34,6 +34,7 @@ public class ChatViewerController {
     @FXML TilePane tilePaneChat;
 
     public void initialize() {
+        Main.checkedMessages = true;
         this.initializeHeader();
         this.fixTile();
         this.renderChats();
@@ -41,6 +42,7 @@ public class ChatViewerController {
     }
 
     private void initializeHeader() {
+
         this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CurrentListings"));
         this.profileimage.setImage(Main.accountManager.getLoggedIn().getAvatar());
         this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
@@ -53,6 +55,8 @@ public class ChatViewerController {
                 ProfileController.viewProfile(Main.accountManager.getLoggedIn());
             }
         });
+
+
     }
 
     /**

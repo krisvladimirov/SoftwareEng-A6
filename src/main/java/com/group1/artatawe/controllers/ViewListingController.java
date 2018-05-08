@@ -207,23 +207,33 @@ public class ViewListingController {
 	 * Initialize the header
 	 */
 	private void initializeHeader() {
-		this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CurrentListings"));
-		this.profileimage.setImage(Main.accountManager.getLoggedIn().getAvatar());
-		this.profileimage.setOnMouseClicked(e -> ProfileController.viewProfile(Main.accountManager.getLoggedIn()));
-		this.createlisting.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
-		this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
-		this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
-		this.buttonMyGallery.setOnMouseClicked(e -> Main.switchScene("UserGallery"));
-		this.myMessages.setOnMouseClicked(e -> Main.switchScene("ChatViewer"));
+        this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CurrentListings"));
+        this.profileimage.setImage(Main.accountManager.getLoggedIn().getAvatar());
+        this.profileimage.setOnMouseClicked(e -> ProfileController.viewProfile(Main.accountManager.getLoggedIn()));
+        this.createlisting.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
+        this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
+        this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
+        this.buttonMyGallery.setOnMouseClicked(e -> Main.switchScene("UserGallery"));
+        this.myMessages.setOnMouseClicked(e -> Main.switchScene("ChatViewer"));
 
-		//I could not get topstack to ignore the mouse event and let the child nodes handle it, so instead
-		//we check where the click happened and what should actually of been clicked.
-		this.topstack.setOnMouseClicked(e -> {
-			if(this.profileimage.intersects(e.getX(), e.getY(), 0, 0)) {
-				ProfileController.viewProfile(Main.accountManager.getLoggedIn());
-			}
-		});
-	}
+        //I could not get topstack to ignore the mouse event and let the child nodes handle it, so instead
+        //we check where the click happened and what should actually of been clicked.
+        this.topstack.setOnMouseClicked(e -> {
+            if(this.profileimage.intersects(e.getX(), e.getY(), 0, 0)) {
+                ProfileController.viewProfile(Main.accountManager.getLoggedIn());
+            }
+        });
+        this.updateMessageNotifyer();
+    }
+
+	private void updateMessageNotifyer() {
+	    int n = Main.notifications.howManyNewMessages();
+	    if (n != 0 && n > 0 && !Main.checkedMessages) {
+	        myMessages.setText("My Messages (" + n + ")");
+        } else {
+            myMessages.setText("My Messages");
+        }
+    }
 
     /**
      * Fixes the tile pane containing all comments

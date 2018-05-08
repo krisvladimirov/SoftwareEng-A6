@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Notification {
 
-    //private List<Message> newMessages;
+    private List<Message> newMessages =  new LinkedList<>();
     //private List<Message> newComments;
 
     /**
@@ -88,18 +88,33 @@ public class Notification {
      * Get a list of all new messages to the currentUser
      * @return
      */
-    public List<Message> getNewMessages() {
+    public void scanForNewMessages() {
 
-        long lastLoginDate = Main.accountManager.getLoggedIn().getLastLogin();
+        long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
         // All the chats a user has participated in
         List<Chat> list = Main.messageManager.getChat(Main.accountManager.getLoggedIn());
         // All the new messages would be stored here
-        List<Message> newMessages = new LinkedList<>();
+        //List<Message> newMessages = new LinkedList<>();
 
         list.forEach(chat -> chat.getNewMessages(lastLoginDate)
                     .forEach(message -> newMessages.add(message)));
 
-        return newMessages;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Message> getNewMessages() {
+        return this.newMessages;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int howManyNewMessages() {
+        return newMessages.size();
     }
 
     /**
