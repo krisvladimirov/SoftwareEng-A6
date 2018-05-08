@@ -579,7 +579,7 @@ public class ViewListingController {
         if (!sortedComments.isEmpty()) {
             //sortedComments = viewing.getComments();
             if (menuTopComments.isSelected()) {
-                sortedComments.sort(Comparator.comparingInt(Comment::getLikes));
+                sortedComments.sort(Comparator.comparingInt(Comment::getLikes).reversed());
             } else if (menuNewestComments.isSelected()) {
                 sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated));
             }
