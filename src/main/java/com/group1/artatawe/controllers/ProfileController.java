@@ -57,7 +57,7 @@ public class ProfileController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
-    @FXML Button MyMessages;
+    @FXML Button myMessages;
 
 	//Profile Specific Attributes
 	@FXML ImageView avatar;
@@ -195,6 +195,7 @@ public class ProfileController {
 		this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
 		this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
 		this.buttonMyGallery.setOnMouseClicked(e -> Main.switchScene("UserGallery"));
+        this.myMessages.setOnMouseClicked(e -> {});
 
         //I could not get topstack to ignore the mouse event and let the child nodes handle it, so instead
         //we check where the click happened and what should actually of been clicked.

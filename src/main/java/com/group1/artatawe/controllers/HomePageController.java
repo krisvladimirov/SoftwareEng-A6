@@ -30,7 +30,7 @@ public class HomePageController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
-	@FXML Button MyMessages;
+	@FXML Button myMessages;
 
 	//Home Page Specific Attributes
 	@FXML GridPane sellingbox;
@@ -54,6 +54,7 @@ public class HomePageController {
 		this.createlisting.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
 		this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
 		this.buttonMyGallery.setOnMouseClicked(e -> Main.switchScene("UserGallery"));
+		this.myMessages.setOnMouseClicked(e -> {});
 
 		//I could not get topstack to ignore the mouse event and let the child nodes handle it, so instead
 		//we check where the click happened and what should actually of been clicked.
