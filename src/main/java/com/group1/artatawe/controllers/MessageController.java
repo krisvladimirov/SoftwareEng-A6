@@ -29,7 +29,6 @@ public class MessageController {
     private Account recipient;
     private Chat chat;
 
-    //TODO -> preload any previous messages from this chat
 
     /**
      *

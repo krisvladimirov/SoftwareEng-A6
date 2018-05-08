@@ -90,6 +90,18 @@ public class Chat {
     }
 
     /**
+     * Gets the other account linked to the current user
+     * @return
+     */
+    public Account getOtherAccount() {
+        return this.accounts.stream()
+                            .filter(x -> x != Main.accountManager.getLoggedIn())
+                            .findFirst()
+                            .get();
+
+    }
+
+    /**
      *
      * @return All messages in one chat
      */

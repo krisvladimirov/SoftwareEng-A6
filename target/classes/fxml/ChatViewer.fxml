@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800" minWidth="1280" prefHeight="1000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.artatawe.controllers.ChatViewerController">
+    <top>
+        <StackPane fx:id="topstack" style="-fx-background-color: #4286f4;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fx:id="profileimage" fitHeight="123.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
+                    <image>
+                        <Image url="@../images/avatars/default.jpg" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="logo" fitHeight="108.0" fitWidth="303.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                    <StackPane.margin>
+                        <Insets />
+                    </StackPane.margin>
+                </ImageView>
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="home" mnemonicParsing="false" style="-fx-background-color: transparent;;" text="Home">
+                            <font>
+                                <Font name="Calibri" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="currentlistings" layoutX="616.0" layoutY="99.0" mnemonicParsing="false" style="-fx-background-color: transparent;;" text="Current Listings">
+                            <font>
+                                <Font name="Calibri" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="createlisting" layoutX="616.0" layoutY="99.0" mnemonicParsing="false" style="-fx-background-color: transparent;;" text="Create Listing">
+                            <font>
+                                <Font name="Calibri" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="buttonMyGallery" mnemonicParsing="false" style="-fx-background-color: transparent;" text="My Galleries">
+                            <font>
+                                <Font name="Calibri" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="myMessages" layoutX="758.0" layoutY="99.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="My Messages" underline="true">
+                            <font>
+                                <Font name="Calibri" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <Button fx:id="logout" alignment="BOTTOM_RIGHT" mnemonicParsing="false" style="-fx-background-color: transparent;;" text="Logout" StackPane.alignment="BOTTOM_RIGHT">
+                    <font>
+                        <Font name="Calibri" size="18.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Button>
+            </children>
+        </StackPane>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="877.0" prefWidth="1280.0">
+         <content>
+            <TilePane fx:id="tilePaneChat" prefHeight="860.0" prefWidth="1278.0" />
+         </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

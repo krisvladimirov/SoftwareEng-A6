@@ -26,7 +26,7 @@ public class CustomGalleryController {
     @FXML Button createlisting;
     @FXML Button logout;
     @FXML Button buttonMyGalleries;
-    @FXML Button MyMessages;
+    @FXML Button myMessages;
 
     @FXML VBox galleryBox;
 
@@ -46,6 +46,7 @@ public class CustomGalleryController {
         this.createlisting.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
         this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
         this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
+        this.myMessages.setOnMouseClicked(e -> Main.switchScene("ChatViewer"));
 
         this.topstack.setOnMouseClicked(e -> {
             if(this.profileimage.intersects(e.getX(), e.getY(), 0, 0)) {
