@@ -69,7 +69,7 @@ public class ChatViewerController {
         Main.messageManager.getChat(currentUser)
                 .forEach(x -> {
                     Account a = x.getOtherAccount();
-                    this.container(a);
+                    tilePaneChat.getChildren().add(this.container(a));
                 });
     }
 
@@ -79,6 +79,7 @@ public class ChatViewerController {
      */
     private Node container(Account a) {
         VBox v = new VBox();
+        v.setStyle("-fx-border-color: #111");
         v.setPadding(new Insets(10.0,10.0,10.0,10.0));
         v.setAlignment(Pos.CENTER);
 
@@ -92,7 +93,7 @@ public class ChatViewerController {
             this.messageWindow(a);
         });
 
-
+        v.getChildren().addAll(image, name);
         return v;
     }
 
