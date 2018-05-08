@@ -67,13 +67,17 @@ public class ChatViewerController {
         tilePaneChat.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
     }
 
+    /**
+     *  Renders the chats by looking up all of the chats the currently logged user has participated
+     */
     private void renderChats() {
-
+        long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
         Account currentUser = Main.accountManager.getLoggedIn();
         Main.messageManager.getChat(currentUser)
                 .forEach(x -> {
+                    long n = x.getNewMessagesFromThisChat(lastLoginDate);
                     Account a = x.getOtherAccount();
-                    tilePaneChat.getChildren().add(this.container(a));
+                    tilePaneChat.getChildren().add(this.container(a, n));
                 });
     }
 
@@ -81,7 +85,7 @@ public class ChatViewerController {
      * Creates the vbox container that would a chat
      * @return
      */
-    private Node container(Account a) {
+    private Node container(Account a, long newMessages) {
         VBox v = new VBox();
         v.setStyle("-fx-border-color: #111");
         v.setPadding(new Insets(10.0,10.0,10.0,10.0));
@@ -90,7 +94,7 @@ public class ChatViewerController {
 
 
         ImageView image = new ImageView(a.getAvatar());
-        Label name = new Label("Messages from: " + a.getUserName());
+        Label name = new Label(newMessages + " new messages from: " + a.getUserName());
         name.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
 
         v.setOnMouseClicked(e -> {
@@ -101,6 +105,10 @@ public class ChatViewerController {
         return v;
     }
 
+    /**
+     * Opens the message window where the currently logged user could send a message to another user
+     * @param a
+     */
     private void messageWindow(Account a) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Message.fxml"));

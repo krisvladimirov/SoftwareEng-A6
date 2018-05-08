@@ -72,15 +72,30 @@ public class Chat {
 
     /**
      * Gets all new messages that were added to this chat since the last login of the seller
-     * @param lastLoging
+     * @param lastLogging
      * @return
      */
-    public List<Message> getNewMessages(long lastLoging) {
+    public List<Message> getNewMessages(long lastLogging) {
         Account a = Main.accountManager.getLoggedIn();
         return messages.stream()
                         .filter(x -> x.getRecipient() == a)
-                        .filter(x -> x.getDate() > lastLoging)
+                        .filter(x -> x.getDate() > lastLogging)
                         .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns how many new messages have been sent to the currently logged user in a specific chat between him and
+     * another user.
+     * @param lastLogging
+     * @return
+     */
+    public long getNewMessagesFromThisChat(long lastLogging) {
+        Account a = Main.accountManager.getLoggedIn();
+        return messages.stream()
+                .filter(x -> x.getRecipient() == a)
+                .filter(x -> x.getDate() > lastLogging)
+                .count();
+
     }
 
     /**
