@@ -108,8 +108,9 @@ public class Notification {
      */
     public List<Comment> getNewComments() {
         String currentUser = Main.accountManager.getLoggedIn().getUserName();
-        long lastLoginDate = Main.accountManager.getLoggedIn().getLastLogin();
+        long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
         // All of the currentUser's listings
+
         List<Listing> listings = Main.listingManager.getAllListings().stream()
                                             .filter(listing -> listing.getSeller().equals(currentUser))
                                             .collect(Collectors.toList());
@@ -118,6 +119,9 @@ public class Notification {
         // All new comments to any of the currentUser's listings
         listings.forEach(listing -> listing.getNewComments(lastLoginDate)
                         .forEach(comment -> newComments.add(comment)));
+
+        System.out.println("How many listings does an account have " + listings.size());
+        System.out.println("How many newComments does it have " + newComments.size() );
 
         return newComments;
     }

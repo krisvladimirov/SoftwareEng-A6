@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.group1.artatawe.Main;
+import com.group1.artatawe.listings.Comment;
 import com.group1.artatawe.utils.GridUtil;
 import com.group1.artatawe.accounts.Account;
 import com.group1.artatawe.listings.Listing;
@@ -163,6 +164,12 @@ public class ProfileController {
         for (Listing listing : Main.accountManager.getLoggedIn().getLostListings()) {
             this.notificationsList.getItems().add("Lost Auction: " + listing.getArtwork().getTitle());
             notificationsListings.add(listing);
+        }
+
+        for (Comment comment : Main.notifications.getNewComments()) {
+            Listing l = Main.listingManager.getListing(comment.getListingId());
+            this.notificationsList.getItems().add("New comment on: " + l.getArtwork().getTitle());
+            notificationsListings.add(l);
         }
     }
 

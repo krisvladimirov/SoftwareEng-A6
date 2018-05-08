@@ -28,7 +28,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		messageManager.saveChatFile();
-		//listingManager.saveListingsFile();
+		listingManager.saveListingsFile();
 	}
 
 	@Override

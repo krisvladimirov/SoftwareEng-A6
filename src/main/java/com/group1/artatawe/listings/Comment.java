@@ -159,4 +159,11 @@ public class Comment {
         return this.owner;
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getListingId() {
+        return this.listingId;
+    }
 }

@@ -33,6 +33,7 @@ public class Account {
     private Address address;
     private Image avatar;
     private long lastLogin;
+    private long preLastLogin;
 
     private List<Listing> newListings;
     private List<Listing> newBids;
@@ -205,6 +206,10 @@ public class Account {
 	 */
 	public LinkedList<Gallery> getUserGalleries() {
 		return userGalleries;
+	}
+
+	public long getPreLastLogin() {
+		return this.preLastLogin;
 	}
 
 	/**
@@ -434,6 +439,7 @@ public class Account {
 		this.lastName = jo.get("lastname").getAsString();
 		this.mobileNum = jo.get("mobile").getAsString();
 		this.lastLogin = jo.get("lastlogin").getAsLong();
+		this.preLastLogin = lastLogin;
 		
 		try {
 			this.avatar = ImageUtil.loadImage(new File(AVATAR_FOLDER, jo.get("avatar").getAsString()));
