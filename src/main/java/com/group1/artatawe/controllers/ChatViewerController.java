@@ -92,16 +92,21 @@ public class ChatViewerController {
         v.setAlignment(Pos.CENTER);
 
 
-
         ImageView image = new ImageView(a.getAvatar());
-        Label name = new Label(newMessages + " new messages from: " + a.getUserName());
-        name.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
+        Label info;
+        if (newMessages != 0) {
+            info = new Label(newMessages + " new messages from: " + a.getUserName());
+        } else {
+            info = new Label("Messages from: " + a.getUserName());
+        }
+        info.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
 
         v.setOnMouseClicked(e -> {
             this.messageWindow(a);
+            this.correctMessageInfo(info, a.getUserName());
         });
 
-        v.getChildren().addAll(image, name);
+        v.getChildren().addAll(image, info);
         return v;
     }
 
@@ -130,5 +135,13 @@ public class ChatViewerController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Changes the label to its default value when the user sees his new messages
+     * @param info
+     */
+    private void correctMessageInfo(Label info, String name) {
+        info.setText("Messages from: " + name);
     }
 }

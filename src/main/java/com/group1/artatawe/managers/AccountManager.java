@@ -66,6 +66,7 @@ public class AccountManager {
 	public void logoutCurrentAccount() {
 		this.loggedInAccount = null;
 		this.saveAccountFile();
+		Main.checkedMessages = false;
 		Main.switchScene("AccountSelect");
 	}
 

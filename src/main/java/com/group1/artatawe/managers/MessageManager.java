@@ -31,7 +31,7 @@ public class MessageManager {
         StringBuilder data = new StringBuilder();
 
         //this.messages.forEach(message -> data.append(message.toJsonObject().toString()));
-        this.chats.forEach(chat -> data.append(chat.toJsonObject().toString()));
+        this.chats.forEach(chat -> data.append(chat.toJsonObject().toString() + "\n"));
 
         File messageFile = new File(MESSAGE_FILE);
 
