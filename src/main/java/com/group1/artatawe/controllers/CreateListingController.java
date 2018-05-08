@@ -42,6 +42,7 @@ public class CreateListingController {
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
 	@FXML ImageView profileimage;
+	@FXML Button MyMessages;
 
 	//Main Attributes
 	@FXML Button done;

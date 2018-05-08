@@ -25,6 +25,7 @@ public class EditAccountController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
+	@FXML Button MyMessages;
 
 	//Edit Account Attributes
 	@FXML TextField firstname;

@@ -57,6 +57,7 @@ public class ProfileController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
+    @FXML Button MyMessages;
 
 	//Profile Specific Attributes
 	@FXML ImageView avatar;

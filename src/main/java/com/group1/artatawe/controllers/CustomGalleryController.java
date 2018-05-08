@@ -21,12 +21,12 @@ public class CustomGalleryController {
     //Header Attributes
     @FXML StackPane topstack;
     @FXML ImageView profileimage;
-
     @FXML Button home;
     @FXML Button currentlistings;
     @FXML Button createlisting;
     @FXML Button logout;
     @FXML Button buttonMyGalleries;
+    @FXML Button MyMessages;
 
     @FXML VBox galleryBox;
 

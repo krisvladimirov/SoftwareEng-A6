@@ -30,6 +30,7 @@ public class HomePageController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
+	@FXML Button MyMessages;
 
 	//Home Page Specific Attributes
 	@FXML GridPane sellingbox;

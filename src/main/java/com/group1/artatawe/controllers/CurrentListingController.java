@@ -29,6 +29,7 @@ public class CurrentListingController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
+	@FXML Button MyMessages;
 
 	//Current Listing Specific Attributes
 	@FXML GridPane alllistings;

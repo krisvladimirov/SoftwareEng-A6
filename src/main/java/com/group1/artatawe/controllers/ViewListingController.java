@@ -61,6 +61,7 @@ public class ViewListingController {
 	@FXML Button createlisting;
 	@FXML Button logout;
 	@FXML Button buttonMyGallery;
+	@FXML Button MyMessages;
 
 	//Listing Attributes
 	@FXML ImageView image;
