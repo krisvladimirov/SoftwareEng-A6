@@ -8,8 +8,18 @@ import com.group1.artatawe.accounts.Account;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author Kristiyan Vladimirov
+ * This class is used to instantiate new 'chat' which would allow two users to send messages between them .
+ * A chat can not exist if there are not messages between two account. On the other hand whenever a message is sent
+ * from Account A to Account B, a new chat is instantiated which would serve as a tool for communication between
+ * A and B
+ */
 public class Chat {
 
+    /*
+        Provides storage which would contain all the messages inside a chat and the users participating in ti
+     */
     Set<Account> accounts = new HashSet<>();
     private List<Message> messages = new LinkedList<>();
 
@@ -24,8 +34,8 @@ public class Chat {
     }
 
     /**
-     *
-     * @param jo
+     * Constructs a new Chat from a JsonObject
+     * @param jo The JsonObject
      */
     public Chat(JsonObject jo) {
         this.loadFromJson(jo);
@@ -52,7 +62,7 @@ public class Chat {
     }
 
     /**
-     *
+     *  Turns a chat into a JsonObject
      * @return JsonObject that would represent the chat with the two account endpoints and all of their messages
      */
     public JsonObject toJsonObject() {
@@ -73,7 +83,7 @@ public class Chat {
     /**
      * Gets all new messages that were added to this chat since the last login of the seller
      * @param lastLogging
-     * @return
+     * @return List of all new Messages from a chat
      */
     public List<Message> getNewMessages(long lastLogging) {
         Account a = Main.accountManager.getLoggedIn();
@@ -87,7 +97,7 @@ public class Chat {
      * Returns how many new messages have been sent to the currently logged user in a specific chat between him and
      * another user.
      * @param lastLogging
-     * @return
+     * @return Number representation of how many new messages have been sent to the user since his last login
      */
     public long getNewMessagesFromThisChat(long lastLogging) {
         Account a = Main.accountManager.getLoggedIn();
@@ -100,7 +110,7 @@ public class Chat {
 
     /**
      * Gets the two accounts that are communication in this chat
-     * @return
+     * @return Set which contains both accounts participating in this chat
      */
     public Set<Account> getAccounts() {
         return this.accounts;
@@ -108,7 +118,7 @@ public class Chat {
 
     /**
      * Gets the other account linked to the current user
-     * @return
+     * @return The second account that is participating in this chat
      */
     public Account getOtherAccount() {
         return this.accounts.stream()
@@ -119,7 +129,7 @@ public class Chat {
     }
 
     /**
-     *
+     * Get all the messages of chat in a list
      * @return All messages in one chat
      */
     public List<Message> getAllMessages() {
@@ -128,7 +138,7 @@ public class Chat {
 
     /**
      * Adds a new message to this chat
-     * @param m
+     * @param m The message to be added
      */
     public void addMessage(Message m) {
         this.messages.add(m);

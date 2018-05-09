@@ -206,14 +206,14 @@
                                     <Insets top="1.0" />
                                  </HBox.margin>
                                  <content>
-                                    <TilePane fx:id="tileComments" prefColumns="1" prefHeight="253.0" prefWidth="496.0" />
+                                    <TilePane fx:id="tileComments" prefColumns="1" prefHeight="240.0" prefWidth="470.0" />
                                  </content>
                               </ScrollPane>
                            </children>
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="messageButton" layoutX="634.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="25.0" prefWidth="142.0" text="Send message" />
+                  <Button fx:id="messageButton" layoutX="634.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: lightgrey;" text="Send message" />
                </children>
             </AnchorPane>
          </center>

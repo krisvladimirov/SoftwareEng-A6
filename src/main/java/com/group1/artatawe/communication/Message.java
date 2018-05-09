@@ -4,6 +4,10 @@ import com.google.gson.JsonObject;
 import com.group1.artatawe.Main;
 import com.group1.artatawe.accounts.Account;
 
+/**
+ * @author Kristiyan Vladimirov
+ * Message is used to create a new Message which would later be added to a 'chat' that is between two people.
+ */
 public class Message {
 
     private String messageValue;
@@ -13,11 +17,11 @@ public class Message {
     // The recipient would always be at participants[1]
 
     /**
-     *
-     * @param sender
-     * @param recipient
-     * @param messageValue
-     * @param date
+     * Constructs a new Message from the information provided by the current user
+     * @param sender The person who is sending the message
+     * @param recipient The person whi is receiving the message
+     * @param messageValue The String value of the message
+     * @param date The date this particular message was created
      */
     public Message(Account sender, Account recipient, String messageValue, long date) {
         this.participants[0] = sender;
@@ -27,8 +31,8 @@ public class Message {
     }
 
     /**
-     *
-     * @param jo
+     * Constructs a new Message from a JsonObject
+     * @param jo The JsonObject
      */
     public Message(JsonObject jo) {
         this.loadFromJson(jo);
@@ -36,8 +40,8 @@ public class Message {
 
 
     /**
-     *
-     * @param jo
+     * Loads all the attributes of a Message from a JsonObject
+     * @param jo The JsonObject
      */
     private void loadFromJson(JsonObject jo) {
 
@@ -49,8 +53,8 @@ public class Message {
     }
 
     /**
-     *
-     * @return
+     * Turn a Message into a JsonObject
+     * @return The JsonObject
      */
     public JsonObject toJsonObject() {
         JsonObject jo = new JsonObject();
@@ -64,18 +68,34 @@ public class Message {
 
     }
 
+    /**
+     * Gets the message value
+     * @return Message value
+     */
     public String getMessageValue() {
         return this.messageValue;
     }
 
+    /**
+     * Gets the sender of this message
+     * @return Sender of message
+     */
     public Account getSender() {
         return this.participants[0];
     }
 
+    /**
+     * Gets the recipient of the message
+     * @return Recipient of message
+     */
     public Account getRecipient() {
         return this.participants[1];
     }
 
+    /**
+     * Gets the creation date of this message
+     * @return Creating date
+     */
     public long getDate() {
         return this.date;
     }

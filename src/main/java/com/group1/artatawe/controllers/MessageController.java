@@ -15,11 +15,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Kristiyan Vladimirov 916747
+ * MessageController is the graphical user interface which allows two user to communication (i.e. Ask questions about
+ * listings) through a 'chat' between them. It does so by opening a 'pop-up' which is modelled/controlled by this class
+ */
 public class MessageController {
 
     @FXML TextArea messageField;
@@ -31,11 +37,15 @@ public class MessageController {
 
 
     /**
-     *
+     * Initializes this controller by getting the recipient contact and fetching or creating a new chat where two users
+     * cold send messages
      * @param account
      */
     public void init(Account account) {
         this.recipient = account;
+        /*
+            Check if there already an existing connection between these two endpoints. Opens a new chat if there is not
+         */
         try {
             this.chat = Main.messageManager.getChat(Main.accountManager.getLoggedIn() ,recipient);
             this.renderMessages();
@@ -47,7 +57,7 @@ public class MessageController {
     }
 
     /**
-     *
+     * Renders all the pass messages from the chat
      */
     private void renderMessages() {
         chat.getAllMessages().forEach(message -> {
@@ -56,6 +66,11 @@ public class MessageController {
         });
     }
 
+    /**
+     * Renders messages by creating a new container for every one
+     * @param m The message that would be displayed
+     * @return Node holding information about a message
+     */
     private Node renderSingleMessage(Message m) {
         HBox h = new HBox();
 
@@ -72,16 +87,23 @@ public class MessageController {
         Text message = new Text(m.getMessageValue());
         message.setWrappingWidth(h.getPrefWidth() * 0.70);
 
+        /*
+            Check if the current is the sender for this message. If so the Node is going to be aligned to the right
+            side of the window. If the current user is a recipient of a message then the Node would be aligned to the
+            left side of the window.
+         */
         if (m.getSender().equals(Main.accountManager.getLoggedIn())) {
             h.setAlignment(Pos.TOP_RIGHT);
             v.setAlignment(Pos.TOP_RIGHT);
-            v.setStyle("-fx-border-color: #166fec");
+            v.setStyle("-fx-border-color: #166fec; -fx-border-radius: 15");
             v.setPrefWidth(h.getPrefWidth() * 0.75);
+            message.setTextAlignment(TextAlignment.RIGHT);
         } else {
             h.setAlignment(Pos.TOP_LEFT);
             v.setAlignment(Pos.TOP_LEFT);
-            v.setStyle("-fx-border-color: #da2827");
+            v.setStyle("-fx-border-color: #da2827; -fx-border-radius: 15");
             v.setPrefWidth(h.getPrefWidth() * 0.75);
+            message.setTextAlignment(TextAlignment.LEFT);
         }
         System.out.println("Width of child vbox " + v.getPrefWidth());
         v.getChildren().addAll(date, message);
@@ -91,7 +113,7 @@ public class MessageController {
     }
 
     /**
-     *
+     * Fetches the String data from the Text area and then passes it as a new message to the recipient.
      */
     public void message() {
         if (messageField.getText().isEmpty() && messageField == null) {

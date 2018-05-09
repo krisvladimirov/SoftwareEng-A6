@@ -18,7 +18,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
+/**
+ * @author Kristiyan Vladimirov 916747
+ * ChatViewerController used to provide a graphical user interface to the user, from which he could communicate with
+ * other sellers/buyers. It renders each two endpoints between two user or in other words a 'chat'. Each chat (if there
+ * is more than one) is represented by its own box with the avatar of the recipient and his name. Additionally, there is
+ * a notification functionality which enables the current user to see how many new messages have been sent to him by
+ * opening the 'My messages' window.
+ */
 public class ChatViewerController {
 
     //Header Attributes
@@ -33,6 +40,10 @@ public class ChatViewerController {
     //Chat attributes
     @FXML TilePane tilePaneChat;
 
+    /**
+     * The first method be run after this controller is called. It prepares the window before it is displayed to the
+     * current user
+     */
     public void initialize() {
         Main.checkedMessages = true;
         this.initializeHeader();
@@ -41,6 +52,9 @@ public class ChatViewerController {
 
     }
 
+    /**
+     * Initializes the header elements of the window and adds the corresponding listeners to each button of the header
+     */
     private void initializeHeader() {
 
         this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CurrentListings"));
@@ -82,8 +96,8 @@ public class ChatViewerController {
     }
 
     /**
-     * Creates the vbox container that would a chat
-     * @return
+     * Creates the vbox container that would hold a chat
+     * @return Node
      */
     private Node container(Account a, long newMessages) {
         VBox v = new VBox();

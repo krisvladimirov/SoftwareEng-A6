@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Class used to generate data for notifications
+ * Notifications is used only to read in the provided data for attributes such as listings, bids, comments
+ * and new messages. Then it uses a series of method which are tasked with looking up if an attribute is indeed 'new'
+ * for the user since his/hers last login. If so it is saved and shown later in the Profiles window under the
+ * notification panel
  *
  * @author Oskar Figura, Nikolina Antoniou and Kristiyan Vladimirov (v1.1)
  * @version 1.1
@@ -21,8 +24,11 @@ import java.util.stream.Collectors;
  */
 public class Notification {
 
-    private List<Message> newMessages =  new LinkedList<>();
-    //private List<Message> newComments;
+    /*
+        Provides storage for all the new messages a user has had during the time since his last login
+     */
+    //private List<Message> newMessages =  new LinkedList<>();
+    private int newMessagesCounter = 0;
 
     /**
      * Create a new Notification object
@@ -85,52 +91,51 @@ public class Notification {
     }
 
     /**
-     * Get a list of all new messages to the currentUser
-     * @return
+     * Scans for any new messages since the last login of the user and then saves them to the memory so the user could
+     * see his messages right after he has logged
      */
     public void scanForNewMessages() {
 
         long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
-        // All the chats a user has participated in
         List<Chat> list = Main.messageManager.getChat(Main.accountManager.getLoggedIn());
-        // All the new messages would be stored here
-        //List<Message> newMessages = new LinkedList<>();
-
         list.forEach(chat -> chat.getNewMessages(lastLoginDate)
-                    .forEach(message -> newMessages.add(message)));
+                    .forEach(message -> newMessagesCounter++));
 
     }
 
     /**
-     *
-     * @return
+     * Gets a list of all the new messages since the last login of the current user
+     * @return List of Messages since last login
      */
+    /*
     public List<Message> getNewMessages() {
         return this.newMessages;
     }
-
+    */
     /**
-     *
-     * @return
+     * Gets how many new messages a user has received since his last login. This is done in order to notify the current
+     * user
+     * @return Integer number representing how many new messages the current user has received
      */
     public int howManyNewMessages() {
-        return newMessages.size();
+        return this.newMessagesCounter;
     }
 
     /**
      * Get a list of all new comments on a sellers actions since last login
-     * @return
+     * @return List of all the new comments on a seller's listing
      */
     public List<Comment> getNewComments() {
         String currentUser = Main.accountManager.getLoggedIn().getUserName();
         long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
-        // All of the currentUser's listings
 
+        // All of the currentUser's listings
         List<Listing> listings = Main.listingManager.getAllListings().stream()
                                             .filter(listing -> listing.getSeller().equals(currentUser))
                                             .collect(Collectors.toList());
 
         List<Comment> newComments = new LinkedList<>();
+
         // All new comments to any of the currentUser's listings
         listings.forEach(listing -> listing.getNewComments(lastLoginDate)
                         .forEach(comment -> newComments.add(comment)));

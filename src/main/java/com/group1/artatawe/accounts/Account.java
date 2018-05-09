@@ -208,6 +208,10 @@ public class Account {
 		return userGalleries;
 	}
 
+	/**
+	 * Saves the exact time of the last login a user has had before he came back online
+	 * @return The pre-lastLogin
+	 */
 	public long getPreLastLogin() {
 		return this.preLastLogin;
 	}

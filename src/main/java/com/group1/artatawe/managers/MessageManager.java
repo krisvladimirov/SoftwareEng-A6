@@ -14,10 +14,18 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author Kristiyan Vladimirov 916747
+ * MessageManager deals with reading/writing from the message Json file which contains all the chats with the messages
+ * inside them or reading/writing for the computers memory.
+ */
 public class MessageManager {
 
     private static final String MESSAGE_FILE = "message.json";
 
+    /*
+        Provides storage for all the chat that are present in the system
+     */
     private final List<Chat> chats = new LinkedList<>();
 
     public MessageManager() {
@@ -30,7 +38,6 @@ public class MessageManager {
     public void saveChatFile() {
         StringBuilder data = new StringBuilder();
 
-        //this.messages.forEach(message -> data.append(message.toJsonObject().toString()));
         this.chats.forEach(chat -> data.append(chat.toJsonObject().toString() + "\n"));
 
         File messageFile = new File(MESSAGE_FILE);
@@ -79,17 +86,10 @@ public class MessageManager {
     }
 
     /**
-     * Tries to send a message to a user, by determining if a chat between two user 'endpoints' exists
-     * If it doesn't exist the try catch block would capture an exception(i.e. there is not connection currently
-     * between the two users) and create a new chat.
-     * @param message The message that would be sen
+     * Deletes a chat from the system and all the messages inside it
+     * @param chat The chat to be deleted
      */
-
-
-    /**
-     * Deletes a chat
-     */
-    public void deleteChat() {
+    public void deleteChat(Chat chat) {
 
     }
 
@@ -126,6 +126,10 @@ public class MessageManager {
 
     }
 
+    /**
+     * Loads a single Chat from a Json String into the system
+     * @param jsonString The Json String that is turned into a chat
+     */
     private void loadChat(String jsonString) {
         JsonParser jsonParser =  new JsonParser();
         try {

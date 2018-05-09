@@ -574,6 +574,10 @@ public class ViewListingController {
 		popup.show();
 	}
 
+	/**
+	 * Renders the comment based on the sorting choose made by the user
+	 * By default this is by 'top comments' (i.e. most liked comments)
+	 */
 	private void renderComments() {
         List<Comment> sortedComments = viewing.getComments();
         if (!sortedComments.isEmpty()) {
@@ -581,7 +585,7 @@ public class ViewListingController {
             if (menuTopComments.isSelected()) {
                 sortedComments.sort(Comparator.comparingInt(Comment::getLikes).reversed());
             } else if (menuNewestComments.isSelected()) {
-                sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated));
+                sortedComments.sort(Comparator.comparingLong(Comment::getDateCreated).reversed());
             }
         }
 
@@ -597,32 +601,60 @@ public class ViewListingController {
 
     }
 
-    private Node container(Comment c) {
+	/**
+	 * Produces a container that would hold all the necessary data for a comment
+	 * @param c The comment on which a container would be produced
+	 * @return Node which holds all information for a comment
+	 */
+	private Node container(Comment c) {
 	    VBox v = new VBox();
 	    v.setAlignment(Pos.TOP_LEFT);
+	    //v.setPrefSize(450, 75);
 	    v.setMinSize(260,50);
+	    //v.setStyle("-fx-border-color: #111");
 		// Create the container for the name and date
 		Node nameDate = nameDataHbox(c.getOwner(), c.getDateCreated());
 		Text comment = new Text(c.getCommentValue());
+		comment.setStyle("-fx-border-color: #111;-fx-border-radius: 5");
+		comment.setWrappingWidth(260.0);
 		Node likeDislike = likeDislikeHbox(c);
-
+		VBox.setMargin(comment, new Insets(5.0, 5.0, 5.0, 5.0));
+		//Separator separator = new Separator();
+		//separator.setPrefWidth(449);
+		//separator.setPrefHeight(5.0);
 		v.getChildren().addAll(nameDate, comment, likeDislike);
 
 	    return v;
     }
 
+	/**
+	 * Produces the container that would hold the owner's name of this comment and date of creation
+	 * @param name Owner of the comment
+	 * @param dateOfCreation Date at which this comment was created
+	 * @return Node which holds the name of the comment owner and the date of creation
+	 */
     private Node nameDataHbox(String name, long dateOfCreation) {
 		HBox h = new HBox();
+		//h.setPadding(new Insets(5.0, 5.0, 5.0, 5.0));
 		h.setAlignment(Pos.CENTER_LEFT);
 		//TODO -> fix the margins
 		Label owner = new Label(name);
 		Label creationDate = new Label(DATE_FORMAT.format(new Date(dateOfCreation)));
+		HBox.setMargin(owner, new Insets(5.0, 5.0, 5.0, 5.0));
+		HBox.setMargin(creationDate, new Insets(5.0, 5.0, 5.0, 5.0));
 
 		h.getChildren().addAll(owner, creationDate);
 
 		return h;
 	}
 
+	/**
+	 * Produces the container that would hold an integer number representing what is the rating of the
+	 * comment either positive or negative (depends on the users) and two. One that is used to like a comment and
+	 * another one to dislike it.
+	 * @param c The comment to which the button are going to be binded
+	 * @return Node which holds the rating of a comment and the like and dislike buttons
+	 */
 	private Node likeDislikeHbox(Comment c) {
 		HBox h = new HBox();
 		Label l = new Label("" + c.getLikes());
@@ -633,7 +665,6 @@ public class ViewListingController {
 		ImageView ivLikeIcon = new ImageView(likeImage);
 		ivLikeIcon.setSmooth(true);
 		ivLikeIcon.setPreserveRatio(true);
-		ivLikeIcon.setStyle("-fx-padding: 5");
 		ivLikeIcon.setFitHeight(16);
 		ivLikeIcon.setFitWidth(16);
 
@@ -652,26 +683,40 @@ public class ViewListingController {
         });
 
 		Button dislike = new Button();
-		dislike.setMaxSize(32,32);
+		dislike.setMaxSize(16,16);
 		dislike.setGraphic(ivDislikeIcon);
 		dislike.setOnMouseClicked(e -> {
             c.dislike(Main.accountManager.getLoggedIn().getUserName());
             l.setText("" + c.getLikes());
         });
+		HBox.setMargin(l,  new Insets(5.0, 5.0, 5.0, 5.0));
+		HBox.setMargin(like,  new Insets(5.0, 5.0, 5.0, 5.0));
+		HBox.setMargin(dislike,  new Insets(5.0, 5.0, 5.0, 5.0));
 
         h.getChildren().addAll(l, like, dislike);
 		return h;
 	}
 
+	/**
+	 * Used to sort the comments by descending order of likes
+	 */
 	public void sortByTopComment() {
 		this.renderComments();
     }
 
-    public void sortByNewestComment() {
+	/**
+	 * Used to sort the comment by descending order of submission
+	 */
+	public void sortByNewestComment() {
 		this.renderComments();
     }
 
-    public void comment() {
+	/**
+	 * Enables the user to comment on a  listing by pressing the comment button which ultimately calls this method
+	 * which would record the comment and then render it.
+	 * If the user intentionally leave the comment section blank, the program would send a complain message
+	 */
+	public void comment() {
 	    String commentValue = commentSection.getText().trim();
 	    if (!viewingOwnListing) {
 	        // Not the listing of the currently logged user -> can comment
@@ -688,7 +733,7 @@ public class ViewListingController {
     }
 
 	/**
-	 * Sends a message to the seller of the artwork
+	 * Sends a message to the seller of the artwork, by opening a new 'pop-up' window
 	 */
 	public void sendMessage() {
 		try {
