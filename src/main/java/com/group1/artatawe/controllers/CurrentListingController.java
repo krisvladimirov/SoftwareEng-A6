@@ -9,6 +9,7 @@ import com.group1.artatawe.utils.GridUtil;
 
 import com.group1.artatawe.utils.Search;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,7 @@ public class CurrentListingController {
 	public void initialize() {
 		this.initializeHeader();
 		this.renderListings();
+		this.putCursors();
 	}
 	
 	/**
@@ -66,7 +68,7 @@ public class CurrentListingController {
 	}
 
 	/**
-	 *
+	 * Updates the Message button by including how many new messages the currently logged user has
 	 */
 	private void updateMessageNotifyer() {
 		int n = Main.notifications.howManyNewMessages();
@@ -75,6 +77,19 @@ public class CurrentListingController {
 		} else {
 			myMessages.setText("My Messages");
 		}
+	}
+
+	/**
+	 * Puts cursors to all of the buttons inside this window
+	 */
+	private void putCursors() {
+		this.createlisting.setCursor(Cursor.HAND);
+		this.home.setCursor(Cursor.HAND);
+		this.logout.setCursor(Cursor.HAND);
+		this.buttonMyGallery.setCursor(Cursor.HAND);
+		this.myMessages.setCursor(Cursor.HAND);
+		this.searchButton.setCursor(Cursor.HAND);
+		this.profileimage.setCursor(Cursor.HAND);
 	}
 
 	/**

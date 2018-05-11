@@ -8,6 +8,7 @@ import com.group1.artatawe.utils.AlertUtil;
 import com.group1.artatawe.utils.ValidationUtil;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -46,6 +47,7 @@ public class EditAccountController {
 
 	public void initialize() {
 		this.initializeHeader();
+		this.putCursors();
 		
 		this.done.setOnMouseClicked(e -> this.handleDoneButton() );
 		this.back.setOnMouseClicked(e -> ProfileController.viewProfile(Main.accountManager.getLoggedIn()));
@@ -96,6 +98,9 @@ public class EditAccountController {
 		this.updateMessageNotifyer();
 	}
 
+	/**
+	 * Updates the Message button by including how many new messages the currently logged user has
+	 */
 	private void updateMessageNotifyer() {
 		int n = Main.notifications.howManyNewMessages();
 		if (n != 0 && n > 0 && !Main.checkedMessages) {
@@ -103,6 +108,22 @@ public class EditAccountController {
 		} else {
 			myMessages.setText("My Messages");
 		}
+	}
+
+	/**
+	 * Puts cursors to all of the buttons inside this window
+	 */
+	private void putCursors() {
+		this.currentlistings.setCursor(Cursor.HAND);
+		this.createlisting.setCursor(Cursor.HAND);
+		this.home.setCursor(Cursor.HAND);
+		this.logout.setCursor(Cursor.HAND);
+		this.buttonMyGallery.setCursor(Cursor.HAND);
+		this.myMessages.setCursor(Cursor.HAND);
+		this.done.setCursor(Cursor.HAND);
+		this.drawavatar.setCursor(Cursor.HAND);
+		this.back.setCursor(Cursor.HAND);
+		this.profileimage.setCursor(Cursor.HAND);
 	}
 	
 	private void loadDefaultValues() {

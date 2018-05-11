@@ -4,6 +4,7 @@ import com.group1.artatawe.Main;
 import com.group1.artatawe.artwork.Gallery;
 import com.group1.artatawe.utils.AlertUtil;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -27,11 +28,19 @@ public class GalleryOptionsController {
 
         initializeListView();
         initializeStyles();
+        this.putCursors();
 
         toggleAddGal.setOnMouseClicked(e -> this.showAddChanges());
         toggleDeleteGal.setOnMouseClicked(e -> this.showDeleteChanges());
         buttonChanges.setOnMouseClicked(e -> execute());
 
+    }
+
+    /**
+     * Puts the cursors on all buttons inside this window
+     */
+    private void putCursors() {
+        this.buttonChanges.setCursor(Cursor.HAND);
     }
 
     /**

@@ -14,6 +14,7 @@ import com.group1.artatawe.utils.ImageUtil;
 import com.group1.artatawe.utils.NumUtil;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -74,7 +75,7 @@ public class CreateListingController {
 
 	public void initialize() {
 		this.initializeHeader();
-		
+		this.putCursors();
 		this.done.setOnMouseClicked(e -> this.handleDoneButton());
 		this.selectimage.setOnMouseClicked(e -> this.handleImageSelect());
 		this.sextraimagebutton.setOnMouseClicked(e -> this.handleExtraImageSelect());
@@ -102,7 +103,7 @@ public class CreateListingController {
 	}
 
 	/**
-	 *
+	 * Updates the Message button by including how many new messages the currently logged user has
 	 */
 	private void updateMessageNotifyer() {
 		int n = Main.notifications.howManyNewMessages();
@@ -111,6 +112,21 @@ public class CreateListingController {
 		} else {
 			myMessages.setText("My Messages");
 		}
+	}
+
+	/**
+	 * Puts cursors to all of the buttons inside this window
+	 */
+	private void putCursors() {
+		this.currentlistings.setCursor(Cursor.HAND);
+		this.home.setCursor(Cursor.HAND);
+		this.logout.setCursor(Cursor.HAND);
+		this.buttonMyGallery.setCursor(Cursor.HAND);
+		this.myMessages.setCursor(Cursor.HAND);
+		this.done.setCursor(Cursor.HAND);
+		this.selectimage.setCursor(Cursor.HAND);
+		this.sextraimagebutton.setCursor(Cursor.HAND);
+		this.profileimage.setCursor(Cursor.HAND);
 	}
 	
 	/**

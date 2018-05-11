@@ -5,6 +5,7 @@ import com.group1.artatawe.accounts.Account;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,8 +22,15 @@ public class SelectAccountController {
 	
 	public void initialize() {
 		this.loadAccounts();
-		
+		this.putCursors();
 		this.createaccount.setOnMouseClicked(e -> this.handleAccountCreate());
+	}
+
+	/**
+	 * Puts the cursors on all buttons inside this window
+	 */
+	private void putCursors() {
+		this.createaccount.setCursor(Cursor.HAND);
 	}
 	
 	/**

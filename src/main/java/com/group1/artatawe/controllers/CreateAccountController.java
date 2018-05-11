@@ -9,6 +9,7 @@ import com.group1.artatawe.utils.AlertUtil;
 import com.group1.artatawe.utils.ValidationUtil;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -40,7 +41,7 @@ public class CreateAccountController {
 	public void initialize() {
 		this.done.setOnMouseClicked(e -> this.handleDoneButton() );
 		this.back.setOnMouseClicked(e -> Main.switchScene("AccountSelect"));
-		
+		this.putCursors();
 		this.drawavatar.setOnMouseClicked(e -> {
 			DrawingController.openDrawGUI();
 			
@@ -58,6 +59,15 @@ public class CreateAccountController {
 				});
 			}
 		});
+	}
+
+	/**
+	 * Puts the cursors on all buttons inside this window
+	 */
+	private void putCursors() {
+		this.done.setCursor(Cursor.HAND);
+		this.back.setCursor(Cursor.HAND);
+		this.drawavatar.setCursor(Cursor.HAND);
 	}
 	
 	/**

@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -101,6 +102,7 @@ public class ViewListingController {
 		this.initializeHeader();
 		this.fixTileComments();
 		menuTopComments.setSelected(true);
+		this.putCursors();
 
 		this.title.setText(viewing.getArtwork().getTitle());
 
@@ -226,6 +228,9 @@ public class ViewListingController {
         this.updateMessageNotifyer();
     }
 
+	/**
+	 * Updates the Message button by including how many new messages the currently logged user has
+	 */
 	private void updateMessageNotifyer() {
 	    int n = Main.notifications.howManyNewMessages();
 	    if (n != 0 && n > 0 && !Main.checkedMessages) {
@@ -234,6 +239,23 @@ public class ViewListingController {
             myMessages.setText("My Messages");
         }
     }
+
+	/**
+	 * Puts cursors to all of the buttons inside this window
+	 */
+	private void putCursors() {
+		this.currentlistings.setCursor(Cursor.HAND);
+		this.createlisting.setCursor(Cursor.HAND);
+		this.home.setCursor(Cursor.HAND);
+		this.logout.setCursor(Cursor.HAND);
+		this.buttonMyGallery.setCursor(Cursor.HAND);
+		this.myMessages.setCursor(Cursor.HAND);
+		this.profileimage.setCursor(Cursor.HAND);
+		this.messageButton.setCursor(Cursor.HAND);
+		this.commentButton.setCursor(Cursor.HAND);
+		this.buttonAddCustomGallery.setCursor(Cursor.HAND);
+		this.placebid.setCursor(Cursor.HAND);
+	}
 
     /**
      * Fixes the tile pane containing all comments

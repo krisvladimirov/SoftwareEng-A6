@@ -8,8 +8,10 @@ import com.group1.artatawe.utils.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -30,6 +32,7 @@ public class MessageController {
 
     @FXML TextArea messageField;
     @FXML VBox messageDisplay;
+    @FXML Button messageButton;
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private Account recipient;
@@ -43,6 +46,7 @@ public class MessageController {
      */
     public void init(Account account) {
         this.recipient = account;
+        this.putCursors();
         /*
             Check if there already an existing connection between these two endpoints. Opens a new chat if there is not
          */
@@ -54,6 +58,13 @@ public class MessageController {
             chat = new Chat(Main.accountManager.getLoggedIn(), recipient);
             Main.messageManager.addChat(chat);
         }
+    }
+
+    /**
+     * Puts the cursors on all buttons inside this window
+     */
+    private void putCursors() {
+        this.messageButton.setCursor(Cursor.HAND);
     }
 
     /**
@@ -74,9 +85,7 @@ public class MessageController {
     private Node renderSingleMessage(Message m) {
         HBox h = new HBox();
 
-        System.out.println("Width of Main vbox " + messageDisplay.getPrefWidth());
         h.setPrefWidth(messageDisplay.getPrefWidth());
-        System.out.println("Width of hbox " + h.getPrefWidth());
 
         VBox v = new VBox();
         v.setSpacing(5);

@@ -11,6 +11,7 @@ import com.group1.artatawe.utils.GridUtil;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +44,7 @@ public class HomePageController {
 		this.renderMySelling();
 		this.renderMyBids();
 		this.renderFavUsers();
+		this.putCursors();
 	}
 	
 	/**
@@ -68,7 +70,7 @@ public class HomePageController {
 	}
 
 	/**
-	 *
+	 * Updates the Message button by including how many new messages the currently logged user has
 	 */
 	private void updateMessageNotifyer() {
 		int n = Main.notifications.howManyNewMessages();
@@ -79,6 +81,17 @@ public class HomePageController {
 			myMessages.setText("My Messages");
 		}
 	}
+    /**
+     * Puts cursors to all of the buttons inside this window
+     */
+    private void putCursors() {
+        this.currentlistings.setCursor(Cursor.HAND);
+        this.createlisting.setCursor(Cursor.HAND);
+        this.logout.setCursor(Cursor.HAND);
+        this.buttonMyGallery.setCursor(Cursor.HAND);
+        this.myMessages.setCursor(Cursor.HAND);
+        this.profileimage.setCursor(Cursor.HAND);
+    }
 
 	/**
 	 * Turns a Listing that is being sold, into a node

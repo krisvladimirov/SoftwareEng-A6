@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ public class ChatViewerController {
     //Header Attributes
     @FXML StackPane topstack;
     @FXML Button currentlistings;
+    @FXML Button createlisting;
     @FXML Button home;
     @FXML Button logout;
     @FXML Button buttonMyGallery;
@@ -47,8 +49,10 @@ public class ChatViewerController {
     public void initialize() {
         Main.checkedMessages = true;
         this.initializeHeader();
+        this.putCursors();
         this.fixTile();
         this.renderChats();
+        this.highlightButton();
 
     }
 
@@ -60,7 +64,7 @@ public class ChatViewerController {
         this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CurrentListings"));
         this.profileimage.setImage(Main.accountManager.getLoggedIn().getAvatar());
         this.home.setOnMouseClicked(e -> Main.switchScene("Home"));
-        this.currentlistings.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
+        this.createlisting.setOnMouseClicked(e -> Main.switchScene("CreateListing"));
         this.logout.setOnMouseClicked(e -> Main.accountManager.logoutCurrentAccount());
         this.buttonMyGallery.setOnMouseClicked(e -> Main.switchScene("UserGallery"));
 
@@ -74,7 +78,23 @@ public class ChatViewerController {
     }
 
     /**
-     * Adjusts the tile pane
+     * Puts the cursors on all buttons inside this window
+     */
+    private void putCursors() {
+        this.currentlistings.setCursor(Cursor.HAND);
+        this.createlisting.setCursor(Cursor.HAND);
+        this.home.setCursor(Cursor.HAND);
+        this.logout.setCursor(Cursor.HAND);
+        this.buttonMyGallery.setCursor(Cursor.HAND);
+        this.profileimage.setCursor(Cursor.HAND);
+    }
+
+    private void highlightButton() {
+        this.currentlistings.setOnDragDetected(e -> System.out.println("Drag detected"));
+    }
+
+    /**
+     * Adjusts the tile pane so that elements would have space that would be separating them
      */
     private void fixTile() {
         tilePaneChat.setHgap(10.0);

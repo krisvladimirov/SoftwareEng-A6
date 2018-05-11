@@ -15,6 +15,7 @@ import com.group1.artatawe.utils.WeeklyBarChart;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -93,6 +94,7 @@ public class ProfileController {
         this.renderSellingListings();
         this.renderSoldListings();
         this.renderWonListings();
+        this.putCursors();
 
         this.avatar.setImage(viewing.getAvatar());
         this.firstname.setText(viewing.getFirstName());
@@ -206,7 +208,7 @@ public class ProfileController {
     }
 
     /**
-     *
+     * Updates the Message button by including how many new messages the currently logged user has
      */
     private void updateMessageNotifyer() {
         int n = Main.notifications.howManyNewMessages();
@@ -215,6 +217,23 @@ public class ProfileController {
         } else {
             myMessages.setText("My Messages");
         }
+    }
+
+    /**
+     * Puts cursors to all of the buttons inside this window
+     */
+    private void putCursors() {
+        this.currentlistings.setCursor(Cursor.HAND);
+        this.createlisting.setCursor(Cursor.HAND);
+        this.home.setCursor(Cursor.HAND);
+        this.logout.setCursor(Cursor.HAND);
+        this.buttonMyGallery.setCursor(Cursor.HAND);
+        this.myMessages.setCursor(Cursor.HAND);
+        this.messageButton.setCursor(Cursor.HAND);
+        this.favbutton.setCursor(Cursor.HAND);
+        this.editaccount.setCursor(Cursor.HAND);
+        this.showMonthlySalesGraphButton.setCursor(Cursor.HAND);
+        this.showWeeklySalesGraphButton.setCursor(Cursor.HAND);
     }
 
     /**

@@ -22,7 +22,7 @@
                               <Insets bottom="20.0" left="20.0" top="20.0" />
                            </HBox.margin>
                         </TextArea>
-                        <Button mnemonicParsing="false" onAction="#message" prefHeight="25.0" prefWidth="110.0" text="Message">
+                        <Button fx:id="messageButton" mnemonicParsing="false" onAction="#message" prefHeight="25.0" prefWidth="110.0" text="Message">
                            <HBox.margin>
                               <Insets bottom="20.0" left="50.0" right="20.0" />
                            </HBox.margin>
