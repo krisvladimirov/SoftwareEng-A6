@@ -83,7 +83,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="43.0" prefHeight="157.0" prefWidth="1280.0" vbarPolicy="ALWAYS">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="43.0" prefHeight="157.0" prefWidth="1280.0">
                      <content>
                         <GridPane fx:id="sellingbox" alignment="TOP_CENTER" hgap="5.0" prefHeight="155.0" prefWidth="1258.0" vgap="5.0">
                           <columnConstraints>
@@ -106,7 +106,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="45.0" prefHeight="156.0" prefWidth="1280.0" vbarPolicy="ALWAYS">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="45.0" prefHeight="156.0" prefWidth="1280.0">
                      <content>
                         <GridPane fx:id="mybidbox" alignment="TOP_CENTER" hgap="5.0" prefHeight="155.0" prefWidth="1258.0" vgap="5.0">
                            <columnConstraints>
@@ -129,7 +129,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" layoutY="42.0" prefHeight="160.0" prefWidth="1280.0" vbarPolicy="NEVER">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="42.0" prefHeight="160.0" prefWidth="1280.0" vbarPolicy="NEVER">
                      <content>
                         <HBox fx:id="favuserbox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" />
                      </content>

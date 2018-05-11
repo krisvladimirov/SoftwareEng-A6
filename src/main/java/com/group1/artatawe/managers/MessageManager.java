@@ -89,9 +89,7 @@ public class MessageManager {
      * Deletes a chat from the system and all the messages inside it
      * @param chat The chat to be deleted
      */
-    public void deleteChat(Chat chat) {
-
-    }
+    public void deleteChat(Chat chat) {}
 
     /**
      * Open file and load all the chat/messages out of the file

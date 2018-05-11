@@ -24,10 +24,7 @@ import java.util.stream.Collectors;
  */
 public class Notification {
 
-    /*
-        Provides storage for all the new messages a user has had during the time since his last login
-     */
-    //private List<Message> newMessages =  new LinkedList<>();
+    // Keeps track of how many new messages a user has
     private int newMessagesCounter = 0;
 
     /**
@@ -95,7 +92,7 @@ public class Notification {
      * see his messages right after he has logged
      */
     public void scanForNewMessages() {
-
+        newMessagesCounter = 0;
         long lastLoginDate = Main.accountManager.getLoggedIn().getPreLastLogin();
         List<Chat> list = Main.messageManager.getChat(Main.accountManager.getLoggedIn());
         list.forEach(chat -> chat.getNewMessages(lastLoginDate)
@@ -103,15 +100,6 @@ public class Notification {
 
     }
 
-    /**
-     * Gets a list of all the new messages since the last login of the current user
-     * @return List of Messages since last login
-     */
-    /*
-    public List<Message> getNewMessages() {
-        return this.newMessages;
-    }
-    */
     /**
      * Gets how many new messages a user has received since his last login. This is done in order to notify the current
      * user

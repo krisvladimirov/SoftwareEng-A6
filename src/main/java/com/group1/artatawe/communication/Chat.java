@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Chat {
 
     /*
-        Provides storage which would contain all the messages inside a chat and the users participating in ti
+        Provides storage which would contain all the messages inside a chat and the users participating in it
      */
     Set<Account> accounts = new HashSet<>();
     private List<Message> messages = new LinkedList<>();
@@ -46,12 +46,14 @@ public class Chat {
      */
     public void loadFromJson(JsonObject jo) {
 
+        // Loads the two account in the chat
         JsonArray accountArray = jo.getAsJsonArray("accounts");
         for (int i = 0; i < accountArray.size(); i++) {
             String account = accountArray.get(i).getAsString();
             this.accounts.add(Main.accountManager.getAccount(account));
         }
 
+        // Loads all the messages from the chat
         JsonArray messagesArray = jo.getAsJsonArray("messages");
         for (int i = 0; i < messagesArray.size(); i++) {
             JsonObject object = messagesArray.get(i).getAsJsonObject();

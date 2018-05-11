@@ -109,7 +109,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="212.0" prefHeight="164.0" prefWidth="1253.0" vbarPolicy="ALWAYS">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="212.0" prefHeight="164.0" prefWidth="1253.0">
                      <content>
                         <GridPane fx:id="selling" prefHeight="149.0" prefWidth="1251.0">
                            <columnConstraints>
@@ -128,7 +128,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="412.0" prefHeight="164.0" prefWidth="1253.0" vbarPolicy="ALWAYS">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="412.0" prefHeight="164.0" prefWidth="1253.0">
                      <content>
                         <GridPane fx:id="sold" prefHeight="149.0" prefWidth="1251.0">
                            <columnConstraints>
@@ -161,7 +161,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="610.0" prefHeight="164.0" prefWidth="1253.0" vbarPolicy="ALWAYS">
+                  <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="610.0" prefHeight="164.0" prefWidth="1253.0">
                      <content>
                         <GridPane fx:id="wonauctions" prefHeight="149.0" prefWidth="1251.0">
                            <columnConstraints>
