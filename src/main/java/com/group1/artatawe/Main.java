@@ -24,6 +24,7 @@ public class Main extends Application {
 	public static final MessageManager messageManager = new MessageManager();
 
 	public static boolean checkedMessages = false;
+	public static int newMessages = 0;
 
 	private static Stage mainStage = null;
 	

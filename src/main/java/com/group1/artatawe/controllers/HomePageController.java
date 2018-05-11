@@ -74,12 +74,13 @@ public class HomePageController {
 	 */
 	private void updateMessageNotifyer() {
 		int n = Main.notifications.howManyNewMessages();
-		System.out.println("How much is n: " + n);
+		//Main.newMessages = Main.notifications.howManyNewMessages();
 		if (n != 0 && n > 0 && !Main.checkedMessages) {
 			myMessages.setText("My Messages (" + n + ")");
 		} else {
 			myMessages.setText("My Messages");
 		}
+
 	}
     /**
      * Puts cursors to all of the buttons inside this window

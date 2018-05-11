@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800" minWidth="1280" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.artatawe.controllers.CurrentListingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800" minWidth="1280" prefHeight="1000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.artatawe.controllers.CurrentListingController">
    <top>
       <StackPane fx:id="topstack" style="-fx-background-color: #4286f4;" BorderPane.alignment="CENTER">
          <children>
@@ -94,7 +94,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="43.0" prefHeight="594.0" prefWidth="1280.0" vbarPolicy="ALWAYS">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="43.0" prefHeight="735.0" prefWidth="1280.0" vbarPolicy="ALWAYS">
                      <content>
                         <GridPane fx:id="alllistings" alignment="TOP_CENTER" hgap="5.0" prefHeight="155.0" prefWidth="1258.0" vgap="5.0">
                           <columnConstraints>

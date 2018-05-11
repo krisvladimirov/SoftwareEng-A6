@@ -104,7 +104,7 @@
                   </Label>
                   <VBox fx:id="infobox" layoutX="81.0" layoutY="89.0" prefHeight="375.0" prefWidth="554.0" spacing="4.0" />
                   <TextField fx:id="amount" layoutX="14.0" layoutY="519.0" prefHeight="25.0" prefWidth="143.0" />
-                  <Button fx:id="placebid" layoutX="167.0" layoutY="519.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: lightgrey;" text="Place Bid" />
+                  <Button fx:id="placebid" layoutX="167.0" layoutY="519.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Place Bid" />
                   <Label layoutX="47.0" layoutY="488.0" text="Current bid:">
                      <font>
                         <Font size="20.0" />
@@ -144,9 +144,9 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <MenuButton fx:id="menuGallery" layoutX="157.0" layoutY="563.0" mnemonicParsing="false" style="-fx-background-color: lightgrey;" text="My galleries" />
-                  <Button fx:id="buttonAddCustomGallery" layoutX="14.0" layoutY="563.0" mnemonicParsing="false" onAction="#addToCustomGallery" style="-fx-background-color: lightgrey;" text="Add to custom gallery" />
-                  <AnchorPane layoutX="12.0" layoutY="605.0" prefHeight="258.0" prefWidth="800.0" style="-fx-border-color: #129129;">
+                  <MenuButton fx:id="menuGallery" layoutX="157.0" layoutY="563.0" mnemonicParsing="false" text="My galleries" />
+                  <Button fx:id="buttonAddCustomGallery" layoutX="14.0" layoutY="563.0" mnemonicParsing="false" onAction="#addToCustomGallery" text="Add to custom gallery" />
+                  <AnchorPane layoutX="12.0" layoutY="605.0" prefHeight="258.0" prefWidth="800.0" style="-fx-border-color: #111;">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="258.0" prefWidth="798.0">
                            <children>
@@ -157,12 +157,12 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label fx:id="commentsNum" text="Num comments">
+                                          <Label fx:id="commentsNum" text="0 comments">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
                                           </Label>
-                                          <MenuBar prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #fff; -fx-border-color: #129129;">
+                                          <MenuBar prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #fff; -fx-border-color: #4286f4;">
                                             <menus>
                                               <Menu mnemonicParsing="false" text="Sort By">
                                                 <items>
@@ -213,7 +213,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="messageButton" layoutX="634.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: lightgrey;" text="Send message" />
+                  <Button fx:id="messageButton" layoutX="659.0" layoutY="373.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="25.0" prefWidth="142.0" text="Send message" />
                </children>
             </AnchorPane>
          </center>

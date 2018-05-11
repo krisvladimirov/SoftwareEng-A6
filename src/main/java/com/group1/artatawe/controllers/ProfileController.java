@@ -127,7 +127,7 @@ public class ProfileController {
 
         this.showWeeklySalesGraphButton.setOnMouseClicked(e -> renderWeeklyGraph());
         this.showMonthlySalesGraphButton.setOnMouseClicked(e -> renderMonthlyGraph());
-        this.editGalleries.setOnMouseClicked(e -> galleryMenuPopup());
+
 
     }
 
@@ -510,34 +510,6 @@ public class ProfileController {
             }
         }
 
-    }
-
-    private void galleryMenuPopup() {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/fxml/GalleryOptions.fxml"));
-
-            BorderPane someRoot = (BorderPane) loader.load();
-
-            GalleryOptionsController controller = loader.getController();
-
-            Scene defaultAvatarScene = new Scene(someRoot);
-
-            Stage defaultAvatarStage = new Stage();
-            defaultAvatarStage.setScene(defaultAvatarScene);
-            defaultAvatarStage.setTitle("Artatawe");
-
-            defaultAvatarStage.initModality(Modality.APPLICATION_MODAL);
-
-            defaultAvatarStage.showAndWait();
-
-            Main.accountManager.saveAccountFile();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
     }
 
     /**

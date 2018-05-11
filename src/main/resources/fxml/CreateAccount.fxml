@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="com.group1.artatawe.controllers.CreateAccountController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.artatawe.controllers.CreateAccountController">
    <top>
       <StackPane prefHeight="108.0" prefWidth="935.0" style="-fx-background-color: #4286f4;" BorderPane.alignment="CENTER">
          <children>
@@ -49,75 +49,75 @@
          <center>
             <AnchorPane prefHeight="692.0" prefWidth="933.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="151.0" layoutY="150.0" text="Username*">
+                  <Label layoutX="162.0" layoutY="223.0" text="Username*">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="148.0" layoutY="188.0" text="First Name*">
+                  <Label layoutX="159.0" layoutY="261.0" text="First Name*">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="149.0" layoutY="233.0" text="Last Name*">
+                  <Label layoutX="160.0" layoutY="306.0" text="Last Name*">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="149.0" layoutY="275.0" text="Mobile Number*">
+                  <Label layoutX="160.0" layoutY="348.0" text="Mobile Number*">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="148.0" layoutY="318.0" text="Address">
+                  <Label layoutX="159.0" layoutY="379.0" text="Address">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="208.0" layoutY="349.0" text="Line 1*">
+                  <Label layoutX="157.0" layoutY="411.0" text="Line 1*">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="208.0" layoutY="375.0" text="Line 2">
+                  <Label layoutX="159.0" layoutY="444.0" text="Line 2">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="208.0" layoutY="400.0" text="Line 3">
+                  <Label layoutX="159.0" layoutY="475.0" text="Line 3">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="208.0" layoutY="426.0" text="City*">
+                  <Label layoutX="157.0" layoutY="508.0" text="City*">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="209.0" layoutY="452.0" text="Postcode*">
+                  <Label layoutX="155.0" layoutY="541.0" text="Postcode*">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="username" layoutX="261.0" layoutY="153.0" prefHeight="25.0" prefWidth="510.0" />
-                  <TextField fx:id="firstname" layoutX="261.0" layoutY="191.0" prefHeight="25.0" prefWidth="510.0" />
-                  <TextField fx:id="lastname" layoutX="261.0" layoutY="236.0" prefHeight="25.0" prefWidth="510.0" />
-                  <TextField fx:id="mobilenum" layoutX="311.0" layoutY="278.0" prefHeight="25.0" prefWidth="460.0" />
-                  <TextField fx:id="line1" layoutX="287.0" layoutY="350.0" prefHeight="25.0" prefWidth="482.0" />
-                  <TextField fx:id="line2" layoutX="287.0" layoutY="376.0" prefHeight="25.0" prefWidth="482.0" />
-                  <TextField fx:id="line3" layoutX="287.0" layoutY="401.0" prefHeight="25.0" prefWidth="482.0" />
-                  <TextField fx:id="city" layoutX="287.0" layoutY="427.0" prefHeight="25.0" prefWidth="482.0" />
-                  <TextField fx:id="postcode" layoutX="287.0" layoutY="453.0" prefHeight="25.0" prefWidth="482.0" />
-                  <Button fx:id="done" layoutX="436.0" layoutY="504.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="141.0" text="Create Account!" />
-                  <Button fx:id="back" layoutX="824.0" layoutY="566.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="78.0" style="-fx-background-color: grey;" text="Back" />
+                  <TextField fx:id="username" layoutX="272.0" layoutY="226.0" prefHeight="25.0" prefWidth="510.0" />
+                  <TextField fx:id="firstname" layoutX="272.0" layoutY="264.0" prefHeight="25.0" prefWidth="510.0" />
+                  <TextField fx:id="lastname" layoutX="272.0" layoutY="309.0" prefHeight="25.0" prefWidth="510.0" />
+                  <TextField fx:id="mobilenum" layoutX="322.0" layoutY="351.0" prefHeight="25.0" prefWidth="460.0" />
+                  <TextField fx:id="line1" layoutX="298.0" layoutY="411.0" prefHeight="25.0" prefWidth="482.0" />
+                  <TextField fx:id="line2" layoutX="298.0" layoutY="444.0" prefHeight="25.0" prefWidth="482.0" />
+                  <TextField fx:id="line3" layoutX="299.0" layoutY="475.0" prefHeight="25.0" prefWidth="482.0" />
+                  <TextField fx:id="city" layoutX="299.0" layoutY="508.0" prefHeight="25.0" prefWidth="482.0" />
+                  <TextField fx:id="postcode" layoutX="299.0" layoutY="541.0" prefHeight="25.0" prefWidth="482.0" />
+                  <Button fx:id="done" layoutX="440.0" layoutY="756.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="141.0" text="Create Account!" />
+                  <Button fx:id="back" layoutX="702.0" layoutY="756.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="78.0" text="Back" />
                   <ImageView fx:id="selectedavatar" fitHeight="111.0" fitWidth="129.0" layoutX="413.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/avatars/default.jpg" />
                      </image>
                   </ImageView>
                   <Label layoutX="427.0" layoutY="125.0" text="Selected Avatar" />
-                  <Button fx:id="drawavatar" layoutX="528.0" layoutY="100.0" mnemonicParsing="false" style="-fx-background-color: lightgrey;" text="Draw your own Avatar!" />
-                  <Label layoutX="151.0" layoutY="123.0" text="* = required" />
+                  <Button fx:id="drawavatar" layoutX="400.0" layoutY="154.0" mnemonicParsing="false" text="Draw your own Avatar!" />
+                  <Label layoutX="162.0" layoutY="196.0" text="* = required" />
                </children>
             </AnchorPane>
          </center>

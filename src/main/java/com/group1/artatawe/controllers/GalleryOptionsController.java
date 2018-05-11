@@ -4,7 +4,6 @@ import com.group1.artatawe.Main;
 import com.group1.artatawe.artwork.Gallery;
 import com.group1.artatawe.utils.AlertUtil;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -28,19 +27,11 @@ public class GalleryOptionsController {
 
         initializeListView();
         initializeStyles();
-        this.putCursors();
 
         toggleAddGal.setOnMouseClicked(e -> this.showAddChanges());
         toggleDeleteGal.setOnMouseClicked(e -> this.showDeleteChanges());
         buttonChanges.setOnMouseClicked(e -> execute());
 
-    }
-
-    /**
-     * Puts the cursors on all buttons inside this window
-     */
-    private void putCursors() {
-        this.buttonChanges.setCursor(Cursor.HAND);
     }
 
     /**
@@ -175,26 +166,16 @@ public class GalleryOptionsController {
 
                     if (selectedIndex != -1) {
 
-                        if (!galleries.getItems().remove(textFieldChoice.getText().trim())) {
-
-                            AlertUtil.sendAlert(Alert.AlertType.ERROR, "Gallery does not exist",
-                                    "Please type in a correct name of a gallery or click from the list view.");
-
-                        } else {
-
-                            //int newSelectedIndex = (selectedIndex == galleries.getItems().size() - 1) ? selectedIndex - 1 : selectedIndex;
-                            galleries.getItems().remove(selectedIndex);
-                            //galleries.getSelectionModel().select(newSelectedIndex);
-
-                        }
+                        //int newSelectedIndex = (selectedIndex == galleries.getItems().size() - 1) ? selectedIndex - 1 : selectedIndex;
+                        galleries.getItems().remove(selectedIndex);
+                        //galleries.getSelectionModel().select(newSelectedIndex);
 
                     } else {
 
-                        AlertUtil.sendAlert(Alert.AlertType.ERROR, "Gallery does not exist",
-                                "Please type in a correct name of a gallery or click from the list view.");
-                        //System.out.println(galleries.getItems().remove(textFieldChoice.getText().trim()));
+                        System.out.println(galleries.getItems().remove(textFieldChoice.getText().trim()));
 
                     }
+
                     this.updateListView();
                     textFieldChoice.clear();
 
@@ -205,9 +186,10 @@ public class GalleryOptionsController {
         } else {
 
             AlertUtil.sendAlert(Alert.AlertType.ERROR, "Form not filled",
-                            "A required field has not been filled!");
+                    "A required field has not been filled!");
 
         }
+
         textFieldChoice.clear();
 
     }
@@ -223,5 +205,6 @@ public class GalleryOptionsController {
             return false;
         }
     }
+
 
 }

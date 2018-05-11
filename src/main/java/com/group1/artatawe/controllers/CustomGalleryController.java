@@ -3,15 +3,20 @@ package com.group1.artatawe.controllers;
 import com.group1.artatawe.Main;
 import com.group1.artatawe.artwork.Gallery;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +33,7 @@ public class CustomGalleryController {
     @FXML Button logout;
     @FXML Button buttonMyGalleries;
     @FXML Button myMessages;
+    @FXML Button buttonEdit;
 
     @FXML VBox galleryBox;
 
@@ -36,6 +42,10 @@ public class CustomGalleryController {
         this.initializeHeader();
         this.anyGalleries();
         this.putCursors();
+        this.buttonEdit.setOnMouseClicked(event -> {
+            this.galleryMenuPopup();
+            this.anyGalleries();
+        });
 
         }
 
@@ -90,11 +100,11 @@ public class CustomGalleryController {
         int size = Main.accountManager.getLoggedIn().getUserGalleries().size(); // all galleries
 
         if (size == 0) {
-
+            galleryBox.getChildren().clear();
             noGalleries();
 
         } else {
-
+            galleryBox.getChildren().clear();
             this.renderGalleriesNu();
 
         }
@@ -176,6 +186,34 @@ public class CustomGalleryController {
 
         return im;
 
+    }
+
+    private void galleryMenuPopup() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/fxml/GalleryOptions.fxml"));
+
+            BorderPane someRoot = (BorderPane) loader.load();
+
+            GalleryOptionsController controller = loader.getController();
+
+            Scene defaultAvatarScene = new Scene(someRoot);
+
+            Stage defaultAvatarStage = new Stage();
+            defaultAvatarStage.setScene(defaultAvatarScene);
+            defaultAvatarStage.setTitle("Artatawe");
+
+            defaultAvatarStage.initModality(Modality.APPLICATION_MODAL);
+
+            defaultAvatarStage.showAndWait();
+
+            Main.accountManager.saveAccountFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
 }

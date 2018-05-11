@@ -68,11 +68,14 @@
          </children>
       </StackPane>
    </top>
-   <center>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="877.0" prefWidth="1280.0">
+   <bottom>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="820.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="galleryBox" />
          </content>
       </ScrollPane>
+   </bottom>
+   <center>
+      <Button fx:id="buttonEdit" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Edit galleries" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
